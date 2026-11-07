@@ -4,6 +4,7 @@ import Layout from "../layouts/Layout.astro";
 import Contact from "../components/Contact.astro";
 import ReportPreview from "../components/diagnosis/ReportPreview.astro";
 import Arrow from "../components/Arrow.astro";
+import StudioHero from "../components/StudioHero.astro";
 import { ja } from "../data/ja";
 import { renderParts } from "../lib/render";
 ---
@@ -13,63 +14,7 @@ import { renderParts } from "../lib/render";
   title="There There Studio｜アプリ開発と、AIアプリの診断・運用相談"
   description="つくばを拠点に、Web・iOSアプリを企画・開発するスタジオ。怪獣スタンプ、レコーダー維新、チェックリスト維新と、AIでつくったアプリの診断・運用を支えるAIアプリ診療所を紹介します。"
 >
-  <section class="studio-hero">
-    <div class="wrap studio-hero-inner">
-      <div class="studio-hero-copy">
-        <img
-          class="studio-wordmark-image"
-          src="/brand/therethere-studio-banner-blue-v1.png"
-          width="1983"
-          height="793"
-          alt="There There Studio."
-          fetchpriority="high"
-        />
-        <h1>
-          小さなアイデアを、
-          <br />
-          <em>使えるかたちに。</em>
-        </h1>
-        <p class="studio-lead">
-          WebとiOSのアプリ開発から、
-          <br />
-          AIでつくったアプリの診断・運用相談まで。
-        </p>
-        <a class="button" href="#works">
-          つくっているものを見る <Arrow />
-        </a>
-        <a class="text-link studio-clinic-link" href="/app-clinic">
-          AIアプリ診療所について <Arrow />
-        </a>
-      </div>
-      <div class="studio-hero-visual" aria-label="開発したiOSアプリの実画面">
-        <figure class="hero-phone phone-back">
-          <img
-            src="/images/checklist/run.webp"
-            width="900"
-            height="1955"
-            alt="チェックリスト維新：声で進めるチェックリスト"
-            fetchpriority="high"
-          />
-        </figure>
-        <figure class="hero-phone phone-front">
-          <img
-            src="/images/recorder/record.webp"
-            width="720"
-            height="1558"
-            alt="レコーダー維新：音声で操作する録音アプリ"
-            fetchpriority="high"
-          />
-        </figure>
-      </div>
-    </div>
-    <div class="studio-band">
-      <span>WEB APPS</span>
-      <span aria-hidden="true">/</span>
-      <span>iOS APPS</span>
-      <span aria-hidden="true">/</span>
-      <span>APP SUPPORT</span>
-    </div>
-  </section>
+  <StudioHero />
   <section id="works" class="section wrap works-section">
     <div class="works-heading">
       <h2>
