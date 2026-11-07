@@ -1,0 +1,36 @@
+{
+  "mode": "built-in image_gen",
+  "date": "2026-11-07",
+  "assets": [
+    {
+      "file": "public/brand/symbol-blue-v1.png",
+      "prompt": "Use case: logo-brand / precise recolor edit\nEdit the supplied AI App Clinic symbol by changing ONLY its colors. Preserve the browser-window and stethoscope symbol EXACTLY: same geometry, proportions, angle, three window dots, stethoscope tube, stroke thickness, negative spaces and circular head. All raspberry/pink pixels become solid cobalt blue #2457E6, matching There There Studio. The small golden center becomes pale blue #A9C7FF. Preserve the white ring around that center. Preserve genuine transparent alpha everywhere outside the symbol and in all original transparent openings. No new shapes, no text, no background, no texture, no glow, no shadow, no gradients. Clean flat precise edges. One square symbol only.",
+      "reference": "public/brand/symbol-neoflux.png"
+    },
+    {
+      "file": "public/brand/logo-banner-blue-v1.png",
+      "prompt": "Use case: logo-brand / precise recolor edit\nRecolor the supplied existing AI App Clinic horizontal banner, preserving its EXACT layout, proportions, icon, typography and Japanese text. Do not redesign or reword. Replace all raspberry/pink in the browser-window/stethoscope symbol with cobalt blue #2457E6; replace the golden circle center with pale blue #A9C7FF. Preserve the circle's white ring. Replace dark text with deep navy #122444. Replace cream canvas with clean opaque WHITE #FFFFFF. Exact first line: \"AIアプリ診療所\". Exact second line: \"アプリの診断・運用サポート\". Preserve both lines accurately and the large icon to their left. Crisp flat colors, no gradients, no textures, no shadow, no additional text. One 3:1 wide banner logo.",
+      "reference": "public/brand/logo-banner-neoflux.png"
+    },
+    {
+      "file": "public/brand/tts-favicon-white-master.png",
+      "prompt": "Use case: logo-brand\nCreate a favicon for There There Studio based on the EXACT bold sans-serif letter style of the supplied blue There There / Studio. logo. Text is exactly \"TTS\", uppercase, all three letters on ONE horizontal line. The capital Ts should use the same straight wide top bar, stem thickness and geometry as the capital T in There; uppercase S should use the same shape and weight as the capital S in Studio. Professional crisp bold neo-grotesque lettering, no stencil cuts, no monospaced grid, no rounded toy type. All three letters solid cobalt blue #2457E6 matching There in the reference; same blue for every letter. Pure opaque white background. Square 1024x1024 canvas, letters centered vertically and horizontally and filling about 88% width. Strong legibility at 32px, carefully spaced but compact. No border, no tile shadow, no additional symbols, no full brand name, no period, no gradients, no texture, no presentation board. One favicon only.",
+      "reference": "public/brand/therethere-studio-banner-blue-v1.png"
+    }
+  ],
+  "exports": {
+    "favicon": [
+      16,
+      32,
+      48,
+      180
+    ],
+    "symbol": 512,
+    "banner": "1200x400"
+  },
+  "notes": [
+    "Raster assets generated with ImageGen; resized exports use Sharp.",
+    "Favicon uses the supplied logo as a visual type reference rather than an identified font file.",
+    "Prior color versions retained."
+  ]
+}

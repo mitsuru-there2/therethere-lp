@@ -1,0 +1,25 @@
+{
+  "mode": "built-in image_gen",
+  "date": "2026-11-07",
+  "reference": "User supplied There There / Studio. wordmark",
+  "assets": [
+    {
+      "path": "public/brand/therethere-studio-banner-blue-v1.png",
+      "background": "white",
+      "prompts": [
+        "Use case: logo-brand\nAsset type: refined professional digital studio wordmark, transparent PNG, wide horizontal canvas around 2.5:1.\nInput image: supplied There There Studio typographic logo is the design foundation and edit target. Keep its recognisable two-line, left-aligned wordmark composition and bold typographic presence. Redesign the typography and colors, not just a recolor.\nPrimary request: make this logo feel like an excellent contemporary digital product / software development studio: precise, confident, refined and professional, still approachable. Typography-only identity, no accompanying symbol. First line exactly \"There There\". Second line exactly \"Studio.\". Keep these exact capitalization and punctuation. The second line is shorter, both lines have comparable cap height and are optically aligned left, as in the reference.\nTypography: beautifully crafted bold modern neo-grotesque / geometric sans serif, controlled clean terminals, balanced counters, slightly tighter but impeccably readable kerning, even rhythm. More disciplined and crisp than the original rounded expressive type. Subtle bespoke details allowed, no exaggerated futuristic cuts or disconnected strokes. There must be a clear intentional space between the two There words.\nColor: make BLUE the dominant identity. First line rich vivid cobalt blue #2457E6. Second line deep midnight navy #122444 with its final period in the same cobalt blue #2457E6. Flat solid colors, maximum legibility on light backgrounds.\nComposition: one single finished wordmark, no brand board; balanced transparent safe margins about 6%, both complete lines comfortably within frame. Use the reference proportions with enough vertical separation to breathe.\nBackground: replace cream with genuine transparent alpha so this logo can be used on a website. Preserve opaque letterforms, crisp edges.\nAvoid: raspberry or pink, cream background, gradients, texture, shadows, bevel, 3D, glow, circuit patterns, code brackets, sparkles, icons, slogans, thin type, extra copy, watermark. No mockup. No added tt tile. The lettering itself is the logo.",
+        "Edit this blue There There Studio wordmark into a pristine production logo on a SOLID WHITE #FFFFFF background. Preserve the exact two-line composition, exact lettering \"There There\" / \"Studio.\", typeface, weight, spacing and blue/navy palette. Change only background and rendering cleanliness: remove ALL speckling, black fringe, rough edges, texture and transparency artifacts. Re-render lettering as completely solid uniform cobalt #2457E6 first line; solid uniform deep navy #122444 Studio, cobalt period. Smooth crisp clean antialiased outlines. Absolutely no gradient or lighting inside the letters. The whole canvas is opaque white including all letter counters and every space between letters. Balanced margins. Wide 2.5:1. One wordmark, no other content."
+      ]
+    },
+    {
+      "path": "public/brand/therethere-studio-square-blue-v1.png",
+      "background": "white",
+      "prompt": "Create the matching SQUARE version of this exact blue There There Studio wordmark on solid opaque WHITE background. Use the attached final wordmark as the typography/color reference. Three left-aligned lines exactly \"There\" then \"There\" then \"Studio.\". Same font and bold weight as reference, cobalt blue #2457E6 for both There lines, deep navy #122444 for Studio and cobalt for the period. All three lines same type size, naturally shorter There lines. Professionally balanced square composition with generous white clearspace, no clipping, text occupies around 82% width and 68% height. Completely solid clean flat letterforms, smooth crisp edges, white inside counters and between letters. No speckles, no noise, no transparent patches, no gradients, no shadow, no texture, no frames, no icons, no extra text. One finished square logo 1024x1024."
+    }
+  ],
+  "notes": [
+    "Blue/navy typographic direction, retains user reference composition.",
+    "White-background final variants selected after inspecting transparency artifacts in exploratory outputs.",
+    "Site not modified."
+  ]
+}

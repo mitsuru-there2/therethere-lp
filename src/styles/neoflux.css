@@ -2,15 +2,16 @@
    Palette, 2px edges, 3/5/8px hard shadows and pressed-button motion. */
 
 :root {
-  --ink: #141210;
-  --muted: #5a5347;
-  --primary: #d04060;
-  --primary-hover: #b8354f;
-  --gold: #ebb956;
-  --paper: #f7f0d4;
-  --surface: #efe6c4;
-  --line: #141210;
-  --edge: #000;
+  --ink: #122444;
+  --muted: #50617a;
+  --primary: #2457e6;
+  --primary-hover: #1842bd;
+  --accent-surface: #dbe7ff;
+  --gold: var(--accent-surface);
+  --paper: #fff;
+  --surface: #f2f6fc;
+  --line: #c9d5e8;
+  --edge: #122444;
   --green: var(--primary);
   --deep: var(--primary-hover);
   --mint: var(--surface);
@@ -18,7 +19,7 @@
   --shadow-sm: 3px 3px 0 var(--edge);
   --shadow-md: 5px 5px 0 var(--edge);
   --shadow-lg: 8px 8px 0 var(--edge);
-  --display: 'Bricolage Grotesque', 'Noto Sans JP', sans-serif;
+  --display: "Bricolage Grotesque", "Noto Sans JP", sans-serif;
 }
 body {
   font-size: 15px;
@@ -53,7 +54,7 @@ a:hover {
   letter-spacing: 0.05em;
 }
 .announcement > span:before {
-  content: '';
+  content: "";
   display: inline-block;
   width: 7px;
   height: 7px;
@@ -754,7 +755,7 @@ legend {
   color: var(--primary-hover);
   font-size: 9px;
 }
-input:not([type='radio']):not([type='checkbox']),
+input:not([type="radio"]):not([type="checkbox"]),
 select,
 textarea {
   border: 2px solid var(--edge);
@@ -827,7 +828,7 @@ textarea::placeholder {
   box-shadow: var(--shadow-sm);
   font-weight: 700;
 }
-.demo-controls button[aria-pressed='true'] {
+.demo-controls button[aria-pressed="true"] {
   border-color: var(--edge);
 }
 .demo-result {

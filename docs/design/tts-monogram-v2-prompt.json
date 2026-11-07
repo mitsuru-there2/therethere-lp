@@ -1,0 +1,17 @@
+{
+  "mode": "built-in image_gen",
+  "date": "2026-11-07",
+  "master": "public/brand/tts-monogram-v2-master.png",
+  "exports": [
+    "public/brand/tts-monogram-v2-16.png",
+    "public/brand/tts-monogram-v2-32.png",
+    "public/brand/tts-monogram-v2-48.png",
+    "public/brand/tts-monogram-v2-180.png"
+  ],
+  "reference": "public/brand/tts-favicon-white-master.png",
+  "prompt": "Use case: logo-brand\nAsset type: finished square favicon / compact monogram for There There Studio, on opaque pure white background, 1024x1024.\nInput image: existing blue TTS wordmark is the type-style and layout reference. Refine it into a carefully crafted LOGO, not just three typed letters. User requires: TT blue, S navy, and a final dot.\nPrimary request: a sophisticated, extremely legible compact \"TTS.\" monogram. Maintain a SINGLE HORIZONTAL LINE reading T T S period. The first TWO capital Ts are cobalt blue #2457E6, and form one bespoke ligature: two clearly distinct vertical stems with one continuous precisely drawn horizontal cap bar across the top, communicating the repetition of There There. This paired-T construction must still unmistakably read as two capital T letters, never a pi symbol, never an H. Add a tiny purposeful notch at the junction of their cap bars if needed for clarity; no decorative cuts elsewhere. To the right, the capital S is deep midnight navy #122444, matching Studio in the brand logo. A compact cobalt blue circular dot immediately follows the S on the baseline. The dot should be roughly 18% of letter cap height, well-separated and fully visible.\nTypography and geometry: dense bold clean neo-grotesque style closely matched to the source There There Studio logo. Precise optical kerning, crisp terminals, subtly rounded curves on the S, not a sharp squared circuit S. Make S optically balanced against the joined TT. All letterforms align to one cap-height and baseline; dot on baseline. Draw as a unified monogram with a strong rectangular silhouette, centered within the square, around 88% of canvas width. Enough white margins for favicon use. The whole word must be legible at 32 pixels. Strong, professional independent software studio identity.\nColor rendering: absolutely flat solid fills. White background #FFFFFF, TT cobalt #2457E6, S navy #122444, final dot cobalt #2457E6. NO gradients, shadows, lighting, textures or grain.\nConstraints: EXACT text TTS. with a single final circular period. No additional shapes, no enclosing square tile, no borders, no slogans, no icon above the text, no stacked lines, no 3D mockup, no presentation board, no watermark. One final logo.",
+  "notes": [
+    "White background, joined cobalt TT, navy S and cobalt period.",
+    "PNG favicon exports and root ICO updated; legacy SVG contains an embedded PNG, not vector outlines."
+  ]
+}

@@ -60,15 +60,32 @@ const canonical = new URL(
       property="og:image"
       content={
         new URL(
-          isClinic ? "/brand/logo-banner-neoflux.png" : "/images/studio-og.svg",
+          isClinic
+            ? "/brand/logo-banner-blue-v1.png"
+            : "/brand/therethere-studio-banner-blue-v1.png",
           Astro.site,
         )
       }
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="theme-color" content="#D04060" />
-    <link rel="icon" type="image/png" href="/brand/symbol-neoflux.png" />
-    <link rel="apple-touch-icon" href="/brand/symbol-neoflux.png" />
+    <meta name="theme-color" content="#2457E6" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/brand/tts-monogram-v2-32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/brand/tts-monogram-v2-16.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/brand/tts-monogram-v2-180.png"
+    />
   </head>
   <body
     class:list={{
@@ -100,20 +117,26 @@ const canonical = new URL(
         }
       >
         {isClinic ? (
-          <img src="/brand/symbol-neoflux.png" width="45" height="45" alt="" />
+          <img src="/brand/symbol-blue-v1.png" width="45" height="45" alt="" />
         ) : (
-          <span class="studio-mark" aria-hidden="true">
-            tt.
+          <img
+            class="studio-logo"
+            src="/brand/therethere-studio-banner-blue-v1.png"
+            width="1983"
+            height="793"
+            alt="There There Studio"
+          />
+        )}
+        {isClinic && (
+          <span>
+            {isClinic ? "AIアプリ診療所" : "There There"}
+            <small>
+              {isClinic
+                ? "BY THERE THERE STUDIO"
+                : "STUDIO / つくばのアプリ開発スタジオ"}
+            </small>
           </span>
         )}
-        <span>
-          {isClinic ? "AIアプリ診療所" : "There There"}
-          <small>
-            {isClinic
-              ? "BY THERE THERE STUDIO"
-              : "STUDIO / つくばのアプリ開発スタジオ"}
-          </small>
-        </span>
       </a>
       <nav class="desktop-nav" aria-label="メインメニュー">
         {nav.map(([href, label]) => (
@@ -154,13 +177,14 @@ const canonical = new URL(
     <footer class="site-footer">
       <div class="footer-top">
         <a class="brand studio-brand" href="/">
-          <span class="studio-mark" aria-hidden="true">
-            tt.
-          </span>
-          <span>
-            There There
-            <small>STUDIO / 暮らしのそばに、使いたくなるアプリを。</small>
-          </span>
+          <img
+            class="studio-logo"
+            src="/brand/therethere-studio-banner-blue-v1.png"
+            width="1983"
+            height="793"
+            alt="There There Studio"
+            loading="lazy"
+          />
         </a>
         <div class="footer-links">
           {isClinic ? (

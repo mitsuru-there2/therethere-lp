@@ -1,11 +1,35 @@
 /* Shared visual language for the studio homepage and app diagnosis landing page. */
 .marketing-page {
-  --primary: #b93e59;
-  --primary-hover: #9e3049;
-  --ink: #191714;
-  --muted: #595448;
-  --paper: #f7f0d4;
-  --surface: #efe7cd;
+  /* Inherit the shared blue studio palette from neoflux.css. */
+  background: var(--paper);
+}
+/* Use the approved wordmark as an asset; keep its two-line lettering intact. */
+.brand img.studio-logo {
+  width: 190px;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  background: white;
+}
+.studio-wordmark-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 28px;
+}
+.studio-band {
+  background: var(--primary);
+  color: white;
+}
+@media (max-width: 640px) {
+  .brand img.studio-logo {
+    width: 160px;
+  }
+  .studio-wordmark-image {
+    margin-bottom: 24px;
+  }
 }
 .marketing-page .site-header {
   padding: 20px max(28px, calc((100vw - 1240px) / 2));
@@ -167,7 +191,8 @@
 .dc-stage-band {
   display: flex;
   justify-content: center;
-  background: var(--gold);
+  background: var(--primary);
+  color: white;
   border-top: 2px solid var(--ink);
   padding: 18px 24px;
   gap: 0;
@@ -178,7 +203,7 @@
   padding-inline: 45px;
 }
 .dc-stage-band span + span {
-  border-left: 1px solid var(--ink);
+  border-left: 1px solid #ffffff66;
 }
 .dc-preview {
   margin: 0;
@@ -195,7 +220,8 @@
   justify-content: space-between;
   align-items: center;
   gap: 14px;
-  background: var(--gold);
+  background: var(--primary);
+  color: white;
   padding: 17px 24px;
   border-bottom: 2px solid var(--edge);
   font-size: 20px;
@@ -236,7 +262,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  border-top: 1px solid #b9b6ac;
+  border-top: 1px solid var(--line);
   padding: 19px 0;
   font-size: 17px;
   font-weight: 700;
@@ -267,13 +293,13 @@
   color: #594314;
 }
 .dc-status-neutral {
-  background: #ecebe6;
-  color: #504c42;
+  background: #e8eef6;
+  color: #445570;
 }
 .dc-preview figcaption {
   padding: 18px 20px;
   text-align: center;
-  background: #f9f5e6;
+  background: var(--surface);
   border-top: 1px solid var(--ink);
   font-size: 13px;
   font-weight: 700;
@@ -315,7 +341,7 @@
   gap: 30px;
 }
 .dc-columns > div + div {
-  border-left: 1px solid #9d9786;
+  border-left: 1px solid var(--line);
   padding-left: 30px;
 }
 .dc-number {
@@ -331,7 +357,7 @@
   font-size: 16px;
 }
 .dc-scope-note {
-  border-top: 1px solid #b7af97;
+  border-top: 1px solid var(--line);
   margin-top: 42px;
   padding-top: 22px;
   font-size: 14px !important;
@@ -359,7 +385,7 @@
 }
 .dc-report-note {
   font-size: 12px !important;
-  border-top: 1px solid #aaa28e;
+  border-top: 1px solid var(--line);
   padding-top: 18px;
 }
 .dc-report-detail {
@@ -386,13 +412,13 @@
 .dc-report-detail dl > div {
   display: grid;
   grid-template-columns: 120px 1fr;
-  border-top: 1px solid #c2bdad;
+  border-top: 1px solid var(--line);
 }
 .dc-report-detail dt {
   padding: 18px 15px;
   font-size: 13px;
   font-weight: 700;
-  background: #faf7ed;
+  background: var(--surface);
 }
 .dc-report-detail dd {
   padding: 18px 22px;
@@ -482,7 +508,7 @@
   list-style: none;
   margin: 0;
   padding: 7px 0 7px 26px;
-  border-left: 1px solid #9d9786;
+  border-left: 1px solid var(--line);
   font-size: 15px;
   line-height: 2.4;
   font-weight: 700;
@@ -499,8 +525,8 @@
 }
 .dc-pricing-terms {
   padding: 24px 35px;
-  border-top: 1px solid #c2bdad;
-  background: #fdfbf4;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
 }
 .dc-pricing-terms > p {
   font-size: 13px;
@@ -536,7 +562,7 @@
   font-size: 14px;
 }
 .dc-pricing-extras details {
-  border-block: 1px solid #aaa28e;
+  border-block: 1px solid var(--line);
   align-self: start;
 }
 .dc-pricing-extras summary {
@@ -588,10 +614,10 @@
   font-size: 32px;
 }
 .dc-faq details {
-  border-top: 1px solid #aaa28e;
+  border-top: 1px solid var(--line);
 }
 .dc-faq details:last-child {
-  border-bottom: 1px solid #aaa28e;
+  border-bottom: 1px solid var(--line);
 }
 .dc-faq summary {
   cursor: pointer;
@@ -778,7 +804,7 @@
   grid-template-columns: 1.05fr 1fr;
   gap: 50px;
   align-items: center;
-  background: #efc66f;
+  background: var(--accent-surface);
   padding: 44px;
   border: 2px solid var(--ink);
   border-radius: 6px;
@@ -1279,7 +1305,7 @@
   .dc-columns > div + div {
     padding: 26px 0 0;
     border-left: 0;
-    border-top: 1px solid #aaa28e;
+    border-top: 1px solid var(--line);
   }
   .dc-columns > div {
     display: grid;
@@ -1382,7 +1408,7 @@
   }
   .dc-pricing-includes {
     border-left: 0;
-    border-top: 1px solid #aaa28e;
+    border-top: 1px solid var(--line);
     padding: 18px 0 0;
     font-size: 15px;
   }

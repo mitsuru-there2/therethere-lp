@@ -1,0 +1,21 @@
+{
+  "mode": "built-in image_gen",
+  "date": "2026-11-07",
+  "assets": [
+    {
+      "path": "public/brand/therethere-studio-square-v1.png",
+      "purpose": "Social avatar / studio symbol",
+      "prompt": "Use case: logo-brand\nAsset type: production square brand symbol for There There Studio, an independent Japanese Web and iOS app development studio. A new coherent identity asset grounded in its current cream, raspberry and near-black website; friendly, capable, typographic, quietly playful.\nPrimary request: Create ONE polished standalone square logo, 1024 x 1024 PNG. A large raspberry #B93E59 square tile with gently rounded corners, a precise near-black #191714 outline and a short solid hard shadow offset down-right, as used by the current studio brand. In the tile center, large warm-cream #F7F0D4 lowercase lettering exactly \"tt.\". Two bold lowercase t letters plus a round full stop; highly legible, beautifully optically spaced, compact rounded grotesque lettering, subtle bespoke typographic character. Identical stem height for both t letters; clear spacing between the letters. The symbol should remain recognizable as a small social avatar.\nComposition: straight-on flat view, centered square mark occupying about 84% of the square canvas, balanced transparent clearspace. The visual center of the letters balances their ascenders and the low dot.\nBackground: genuine transparent alpha outside the tile and shadow, NOT a checkerboard illustration. The cream letterforms themselves are solid opaque ink.\nConstraints: only the exact text \"tt.\"; no full brand name, no slogan, no extra icons, no app store badge, no device mockup, no medical symbols, no circuits, no gradients, no glow, no 3D bevel, no texture, no watermark. Crisp vector-like edges. One logo only, no presentation sheet or variants."
+    },
+    {
+      "path": "public/brand/therethere-studio-banner-v1.png",
+      "purpose": "Horizontal logo for light backgrounds",
+      "prompt": "Use case: logo-brand\nAsset type: production horizontal banner logo for There There Studio, a Japanese independent app development studio. Wide 3:1 aspect ratio transparent PNG, approximately 2400 x 800.\nInput image: existing square tt. logo is the EXACT identity source to preserve. Create its corresponding horizontal brand lockup, not a presentation or a mockup.\nPrimary request: Place that same raspberry square tt. emblem at the left, unchanged in shape, cream letterforms, near-black border and small down-right hard shadow. To the right, an elegant bold near-black #191714 rounded grotesque wordmark. First line, large, exactly \"There There\" (capital T in each word). Second line, smaller with considered generous tracking, exactly \"STUDIO\". The complete brand reads There There Studio. Use friendly confident typography like Bricolage Grotesque, with excellent optical kerning, not a generic technology font. The two-line wordmark's total height should be roughly 68% of the emblem height and visually centered alongside it. Emblem takes around 23% of total content width, with generous but cohesive gap. Layout fills most of the wide canvas with 6% transparent padding. The composition must read as one carefully crafted identity.\nColor: reference raspberry #B93E59 and warm cream #F7F0D4, near-black #191714 typography. Solid flat fills, clean precise crisp vector-like edges.\nBackground: actual transparent alpha, not white, not cream, not a drawn checkerboard. Use on cream/light surfaces.\nConstraints: preserve exact source tt. emblem, no extra symbols, no tagline, no Japanese writing, no thin illegible text, no gradients, no texture, no 3D mockup, no skew/perspective, no watermark, one final lockup only. Exact text: \"tt.\" inside symbol; \"There There\" and \"STUDIO\" to the right.",
+      "reference": "public/brand/therethere-studio-square-v1.png"
+    }
+  ],
+  "notes": [
+    "Transparent PNG raster masters.",
+    "New assets only; existing logos and site markup not replaced."
+  ]
+}
