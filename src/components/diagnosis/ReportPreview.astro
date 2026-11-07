@@ -1,0 +1,75 @@
+---
+interface Props {
+  overview?: boolean;
+}
+const { overview = false } = Astro.props;
+---
+
+<figure
+  class:list={["dc-preview", { "dc-preview-overview": overview }]}
+  aria-label="架空の予約アプリの診断レポート例"
+>
+  <div class="dc-preview-bar">
+    <span>診断レポート</span>
+    <span class="dc-sample-tag">サンプル</span>
+  </div>
+  <div class="dc-preview-content">
+    <p class="dc-kicker">WEB APP CHECK / 01</p>
+    <p class="dc-preview-title">
+      予約アプリの
+      <br />
+      公開前チェック
+    </p>
+    {overview ? (
+      <ol class="dc-preview-checks">
+        <li>
+          <span>
+            <b>01</b> 権限・データ
+          </span>
+          <span class="dc-status-high">優先して対応</span>
+        </li>
+        <li>
+          <span>
+            <b>02</b> 公開設定
+          </span>
+          <span class="dc-status-review">改善を推奨</span>
+        </li>
+        <li>
+          <span>
+            <b>03</b> 復旧の備え
+          </span>
+          <span class="dc-status-neutral">要確認</span>
+        </li>
+      </ol>
+    ) : (
+      <>
+        <div class="dc-preview-finding">
+          <span class="dc-status-high">優先度 高</span>
+          <h3>
+            他の利用者の予約が
+            <br />
+            見える可能性
+          </h3>
+        </div>
+        <dl class="dc-preview-excerpt">
+          <div>
+            <dt>確認したこと</dt>
+            <dd>
+              予約の取得処理で、利用者ごとのアクセス制限が不足していました。
+            </dd>
+          </div>
+          <div>
+            <dt>改善の進め方</dt>
+            <dd>
+              サーバー側で権限を確認し、別の利用者の予約を取得できないことを確かめます。
+            </dd>
+          </div>
+        </dl>
+      </>
+    )}
+  </div>
+  <figcaption>
+    根拠・優先順位・直し方・確認方法まで。
+    <small>説明用の架空例です。実際の診断結果ではありません。</small>
+  </figcaption>
+</figure>

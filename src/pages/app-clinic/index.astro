@@ -1,458 +1,411 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Arrow from '../../components/Arrow.astro';
-import Label from '../../components/SectionLabel.astro';
-import ContactForm from '../../components/ContactForm.astro';
+import Layout from "../../layouts/Layout.astro";
+import Arrow from "../../components/Arrow.astro";
+import ContactForm from "../../components/ContactForm.astro";
+import ReportPreview from "../../components/diagnosis/ReportPreview.astro";
+import Operator from "../../components/diagnosis/Operator.astro";
 export const prerender = false;
-const hero = {
-  title: 'アプリは、自分で育てたい。\n運用の不安は、相談したい。',
-  text: 'AIで作ったWebアプリの、権限・データ・公開設定を確認。\n改善の優先順位と、自分で直すための手順をお伝えします。',
-  items: [],
-};
-const concerns = {
-  title: '「動いた」の、その先で。\n気になることはありませんか。',
-  text: '今後も自分で機能を作り続けたい方の、判断と改善を支援します。',
-  items: [
-    {
-      title: 'このデータ、誰から見える？',
-      text: 'ログインはできる。でも、他の人のデータが見えてしまわないか不安。',
-    },
-    {
-      title: 'このまま公開して、大丈夫？',
-      text: 'APIキーや管理画面を、公開してよい状態にできているか分からない。',
-    },
-    {
-      title: 'もし止まったら、どうしよう。',
-      text: 'エラーやデータ消失が起きたとき、何を確認すればよいか分からない。',
-    },
-    {
-      title: '機能を足したら、どこを確認？',
-      text: '変更の影響がどこまであるのか、何をテストすればよいか判断できない。',
-    },
-  ],
-};
-const diagnosis = {
-  title: '直す優先順位と、\n直した後の確認方法まで。',
-  text: '診断と説明だけのご依頼も可能です。\n修正や保守は、必要になったときに選べます。',
-  items: [
-    {
-      title: '誰が、何を見られるか。',
-      text: 'ログインとユーザーごとのアクセス権限。見せてよい相手にだけ、必要な情報が届くかを確認します。',
-    },
-    {
-      title: '何が外に出て、どう残るか。',
-      text: '秘密情報の扱い、公開設定、データの登録・更新。アプリの内側と外側の境界を確認します。',
-    },
-    {
-      title: '異変に気づき、元に戻せるか。',
-      text: 'エラーの記録と通知、バックアップ、復旧手順。公開後に困ったときの備えを確認します。',
-    },
-  ],
-};
-const pricing = {
-  title: 'まずは診断。\nその先は、必要な分だけ。',
-  text: '1アプリの合意した範囲を確認し、診断レポートと説明をお渡しします。改善の優先順位から、修正手順・確認方法まで。',
-  items: [
-    {
-      title: '必要な修正と公開作業',
-      text: '診断結果から対応範囲を決めて、個別にお見積もり。ご自身での修正と組み合わせることもできます。',
-    },
-    {
-      title: '公開後のアプリ保守',
-      text: 'パッチ適用やエラー監視など。提供準備中のため、現在はご希望を伺っています。',
-    },
-  ],
-};
-const price = {
-  title: '30,000',
-  text: '固定料金・税別',
-  taxIncluded: '33,000',
-};
-const flow = {
-  title: 'つくる主役は、\nこれからも、あなたです。',
-  text: '業務システムの導入からWebアプリの開発・運用までを経験した担当者が、改善の優先順位と進め方をご案内します。',
-  items: [
-    {
-      title: '状況を送る',
-      text: '作ったアプリと、気になっていることを共有。技術の名前が分からなくても大丈夫です。',
-    },
-    {
-      title: '範囲と料金を確認する',
-      text: '対応可否・成果物・料金・納期に納得してから、ご依頼いただけます。',
-    },
-    {
-      title: '診断と説明を受ける',
-      text: '根拠と優先順位、直し方、確認方法。ご自身で判断できるようにお伝えします。',
-    },
-    {
-      title: '進め方を選ぶ',
-      text: '自分で改善する。必要な作業を相談する。次の一歩は、あなたが選べます。',
-    },
-  ],
-};
+const checks = [
+  {
+    title: "権限とデータ",
+    text: "ログインと利用者ごとのアクセス権限。必要な情報が、見せてよい相手にだけ届くかを確認します。",
+  },
+  {
+    title: "秘密情報と公開設定",
+    text: "APIキーなどの秘密情報、管理画面、公開設定。アプリの内側と外側の境界を確認します。",
+  },
+  {
+    title: "異変への備え",
+    text: "エラーの記録と通知、バックアップ、復旧手順。公開後に困ったときの備えを確認します。",
+  },
+];
+const steps = [
+  {
+    title: "状況を伝える",
+    text: "作ったアプリと、気になることを共有。技術の名前が分からなくても大丈夫です。",
+  },
+  {
+    title: "範囲と料金を確認",
+    text: "対応可否・成果物・料金・納期をご案内。納得してから、ご依頼いただけます。",
+  },
+  {
+    title: "診断と説明を受ける",
+    text: "根拠と優先順位、直し方、確認方法をレポートにまとめてお伝えします。",
+  },
+  {
+    title: "自分のペースで改善",
+    text: "自分で直す、必要な作業を相談する。次の進め方は、ご自身で選べます。",
+  },
+];
 const faq = {
-  title: '相談の前に、\n知っておきたいこと。',
-  text: '',
+  title: "相談の前に、\n知っておきたいこと。",
+  text: "",
   items: [
     {
-      title: '診断料金が3万円を超えることはありますか？',
-      text: '通常、個人で作成したWebアプリの診断は税別30,000円（税込33,000円）を超えることはありません。規模が大きく複雑な場合に限り、作業着手前に別途お見積もりし、ご了承いただいてから開始します。修正・公開作業を追加で依頼する場合は、診断とは別にお見積もりします。',
+      title: "診断料金が33,000円（税込）を超えることはありますか？",
+      text: "通常、個人で作成したWebアプリの診断は税別30,000円（税込33,000円）を超えることはありません。規模が大きく複雑な場合に限り、作業着手前に別途お見積もりし、ご了承いただいてから開始します。修正・公開作業を追加で依頼する場合は、診断とは別にお見積もりします。",
     },
     {
-      title: '支払いはいつですか？',
-      text: '診断後の請求書払い・後払いです。銀行振込、または請求書ごとにご案内するStripeの決済リンクからカードでお支払いいただけます。支払日はご依頼前に合意します。',
+      title: "納期や、質問できる回数は決まっていますか？",
+      text: "対象のアプリと確認範囲を伺ったうえで、ご依頼前に納期をご案内します。結果の説明方法、質問・再確認の回数も事前に合意します。連絡は非同期中心、打合せは予約制です。",
     },
     {
-      title: '事例掲載に協力しなくても依頼できますか？',
-      text: 'はい。通常料金で、事例を公開しない診断も選べます。掲載にご協力いただく場合は、診断後のアンケート回答と事例掲載の許可で診断料金から税別3,000円を割り引きます。公開する範囲と掲載原稿は、公開前に確認・承認いただきます。高評価や好意的な回答は条件ではありません。',
+      title: "支払いはいつですか？",
+      text: "診断後の請求書払い・後払いです。銀行振込、または請求書ごとにご案内するStripeの決済リンクからカードでお支払いいただけます。支払日はご依頼前に合意します。",
     },
     {
-      title: '自分で修正してもよいですか？',
-      text: 'はい。自分で改善できるように手順と確認方法をお伝えします。修正の追加依頼は必須ではありません。',
+      title: "事例掲載に協力しなくても依頼できますか？",
+      text: "はい。通常料金で、事例を公開しない診断も選べます。掲載にご協力いただく場合は、診断後のアンケート回答と事例掲載の許可で診断料金から税別3,000円を割り引きます。公開する範囲と掲載原稿は、公開前に確認・承認いただきます。高評価や好意的な回答は条件ではありません。",
     },
     {
-      title: '公開済みのアプリでも相談できますか？',
-      text: 'はい。公開前・運用中・変更後の状況に合わせ、確認する範囲をご相談します。',
+      title: "自分で修正してもよいですか？",
+      text: "はい。自分で改善できるように手順と確認方法をお伝えします。修正の追加依頼は必須ではありません。",
     },
     {
-      title: '使っている技術がよく分からなくても大丈夫ですか？',
-      text: '分かる範囲で、使った作成ツールや公開方法をお知らせください。対応できる構成か確認します。',
+      title: "公開済みのアプリでも相談できますか？",
+      text: "はい。公開前・運用中・変更後の状況に合わせ、確認する範囲をご相談します。",
     },
     {
-      title: '診断を受ければ安全だと保証されますか？',
-      text: '合意した範囲と確認時点での問題、改善案、未確認事項をお伝えするサービスです。網羅的な脆弱性診断や安全性の認証は含みません。',
+      title: "使っている技術がよく分からなくても大丈夫ですか？",
+      text: "分かる範囲で、使った作成ツールや公開方法をお知らせください。対応できる構成か確認します。",
     },
     {
-      title: 'すぐに復旧してほしい場合も依頼できますか？',
-      text: '予約制・非同期中心のため、24時間の有人対応や即時復旧には対応していません。',
+      title: "診断を受ければ安全だと保証されますか？",
+      text: "合意した範囲と確認時点での問題、改善案、未確認事項をお伝えするサービスです。網羅的な脆弱性診断や安全性の認証は含みません。",
     },
     {
-      title: 'コードやデータはどう渡しますか？',
-      text: '最初のフォームでは概要だけを伺います。コードの共有方法、必要な権限、AIツールの利用範囲は、診断前に確認します。',
+      title: "すぐに復旧してほしい場合も依頼できますか？",
+      text: "予約制・非同期中心のため、24時間の有人対応や即時復旧には対応していません。",
+    },
+    {
+      title: "コードやデータはどう渡しますか？",
+      text: "最初のフォームでは概要だけを伺います。コードの共有方法、必要な権限、AIツールの利用範囲は、診断前に確認します。",
     },
   ],
-};
-const contact = {
-  title: '今のアプリのこと、\n聞かせてください。',
-  text: '公開前の確認も、運用中の不安も。\n何を見てもらえばよいか決まっていなくても、\n作ったものと困っていることからご相談ください。',
-  items: [],
 };
 ---
 
-<Layout clinic title="AIアプリ診療所｜アプリは自分で。運用の不安は、相談を。" description="AIで作ったWebアプリの権限・データ・公開設定を確認。改善の優先順位と、自分で直すための手順をお伝えします。">
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-copy">
-        <p class="eyebrow">
-          <span class="tiny-line"></span> AIでWebアプリをつくる、あなたへ。
-        </p>
+<Layout
+  clinic
+  landing
+  title="AIアプリ診療所｜AIでつくったWebアプリの診断・運用相談"
+  description="AIで作ったWebアプリの権限・データ・公開設定を確認。根拠付きの診断レポートと、自分で直す手順・確認方法をお渡しします。診断・アドバイス33,000円（税込）。"
+>
+  <section class="dc-hero">
+    <div class="dc-wrap">
+      <p class="dc-breadcrumb">
+        <a href="/">ホーム</a>
+        <span>/</span>AIアプリ診断
+      </p>
+    </div>
+    <div class="dc-wrap dc-hero-grid">
+      <div class="dc-hero-copy">
+        <p class="dc-eyebrow">AIでつくったWebアプリの診断</p>
         <h1>
-          {hero.title.split('\n').map((line, i) => (
-            <span class:list={{ accent: i === 1 }}>
-              {line.split('、').map((phrase, part, phrases) => (
-                <span class="hero-phrase">
-                  {phrase}
-                  {part < phrases.length - 1 ? '、' : ''}
-                </span>
-              ))}
-            </span>
-          ))}
+          何を直すか。
+          <br />
+          どう直すか。
+          <br />
+          <em>一緒に、明確に。</em>
         </h1>
-        <p class="hero-description">{hero.text}</p>
-        <div class="hero-actions">
+        <p class="dc-lead">
+          権限・データ・公開設定を確認し、
+          <br class="desktop-break" />
+          改善の優先順位と、あなた自身で
+          <br class="desktop-break" />
+          直すための手順をお伝えします。
+        </p>
+        <div class="dc-actions">
           <a class="button" href="#contact" data-event="cta_click">
-            診断について相談する
-            <Arrow />
+            診断について相談する <Arrow />
           </a>
-          <a class="text-link" href="#diagnosis">
-            診断で確認すること<span>↘</span>
+          <a class="text-link" href="#report">
+            レポートの例を見る <Arrow />
           </a>
         </div>
-        <p class="fine-print">
-          診断・アドバイス {price.title}円（税別）／税込{price.taxIncluded}円
+        <p class="dc-hero-price">
+          <strong>33,000円</strong>（税込）
+          <small>送信だけでは契約・課金は発生しません。</small>
         </p>
       </div>
-      <div class="clinic-intro-art" aria-label="AIアプリ診療所：診断、改善、運用の相談">
-        <img src="/brand/logo-banner-neoflux.png" width="1200" height="400" alt="AIアプリ診療所" fetchpriority="high" />
-        <div class="clinic-care-steps"><span>01 診断する</span><span>02 改善する</span><span>03 育てる</span></div>
-        <p>つくる主役は、これからもあなた。</p>
-      </div>
+      <ReportPreview overview />
     </div>
-    <div class="hero-bottom">
-      <span>つくる楽しさに、運用の安心を。</span>
-      <div>
-        公開前<span>／</span>運用中<span>／</span>機能変更後
-      </div>
-      <a href="#concerns" aria-label="下へスクロール">
-        SCROLL TO EXPLORE <span>↓</span>
-      </a>
+    <div class="dc-stage-band">
+      <span>公開前の確認</span>
+      <span>運用中の見直し</span>
+      <span>機能変更後のチェック</span>
     </div>
   </section>
-
-  <section class="section section-grid wrap reveal" id="concerns">
-    <Label number="01" label="YOUR CONCERNS" />
-    <div>
-      <h2 class="section-heading">{concerns.title}</h2>
-      <div class="concerns-grid">
-        {concerns.items.map((item, i) => (
-          <div class="concern">
-            <span class="concern-icon" aria-hidden="true">
-              {['↔', '↗', '↺', '＋'][i]}
-            </span>
+  <section class="dc-section" id="diagnosis">
+    <div class="dc-wrap">
+      <p class="dc-kicker">01 / 診断で確認すること</p>
+      <h2>
+        公開の前も、
+        <br class="mobile-break" />
+        その後も。
+      </h2>
+      <p class="dc-section-lead">
+        「このデータ、誰から見える？」「このまま公開して、大丈夫？」
+        <br />
+        気になるところから、確認する範囲を一緒に決めます。
+      </p>
+      <div class="dc-columns">
+        {checks.map((item, i) => (
+          <div>
+            <span class="dc-number">0{i + 1}</span>
             <h3>{item.title}</h3>
             <p>{item.text}</p>
           </div>
         ))}
       </div>
-      <p class="section-note">{concerns.text}</p>
-    </div>
-  </section>
-
-  <section class="diagnosis-section" id="diagnosis">
-    <div class="section section-grid wrap reveal">
-      <Label number="02" label="WHAT WE CHECK" />
-      <div>
-        <div class="section-heading-row">
-          <h2 class="section-heading">{diagnosis.title}</h2>
-          <img src="/brand/symbol-neoflux.png" width="96" height="96" alt="" loading="lazy" />
-        </div>
-        <div class="diagnosis-list">
-          {diagnosis.items.map((item, i) => (
-            <div>
-              <span class="mono">0{i + 1}</span>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </div>
-          ))}
-        </div>
-        <div class="deliverables">
-          <p class="mono">WHAT YOU GET</p>
-          <h3>診断のあとに、手元に残るもの。</h3>
-          <ul>
-            <li>根拠付きの指摘と優先順位</li>
-            <li>自分で直す手順と確認方法</li>
-            <li>未確認事項と運用チェックリスト</li>
-          </ul>
-        </div>
-        <p class="section-note">{diagnosis.text}</p>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="pricing-section" id="pricing">
-    <div class="section section-grid wrap reveal">
-      <Label number="04" label="SERVICE & PRICING" />
-      <div>
-        <h2 class="section-heading">{pricing.title}</h2>
-        <div class="primary-plan">
-          <div class="plan-title">
-            <span class="mono">START HERE</span>
-            <span>まずは、アプリの状態を知ることから。</span>
-          </div>
-          <div class="plan-body">
-            <div>
-              <h3>診断・アドバイス</h3>
-              <p>{pricing.text}</p>
-              <ul class="check-list">
-                <li>根拠付きの診断レポート</li>
-                <li>改善の優先順位と具体的な手順</li>
-                <li>修正後の確認方法と説明</li>
-              </ul>
-            </div>
-            <div class="plan-price">
-              <span>{price.text}</span>
-              <p>
-                <b>{price.title}</b>
-                <span>円</span>
-              </p>
-              <small>税込{price.taxIncluded}円</small>
-              <small>1アプリ・事前に合意した範囲</small>
-              <small>
-                請求書払い・後払い
-                <br />
-                銀行振込／カード決済
-              </small>
-              <a class="button" href="#contact" data-event="cta_click">
-                診断について相談する
-                <Arrow />
-              </a>
-            </div>
-          </div>
-          <p class="plan-footnote">
-            <strong>
-              通常、個人で作成したWebアプリの診断は、税別30,000円（税込33,000円）を超えることはありません。
-            </strong>
-            <br />
-            規模が大きく複雑な場合に限り、作業着手前に別途お見積もりし、ご了承いただいてから開始します。診断範囲・納期・質問や再確認の回数は、ご依頼前に合意します。
-          </p>
-        </div>
-        <aside class="case-discount" aria-labelledby="case-discount-title">
-          <div>
-            <span class="mono">事例掲載協力割引・希望者のみ</span>
-            <h3 id="case-discount-title">事例掲載へのご協力で3,000円引き。</h3>
-            <p>
-              診断後のアンケートへのご回答と、当サイトへの事例掲載をご承諾いただいた場合に適用します。公開範囲・掲載内容は、公開前にご確認・承認いただきます。
-            </p>
-            <p>
-              評価の内容によって割引の適用が変わることはありません。通常料金で、非公開の診断も選べます。
-            </p>
-          </div>
-          <div class="case-discount-price">
-            <span>通常料金30,000円（税別）の場合</span>
-            <p>
-              <strong>27,000</strong>円（税別）
-            </p>
-            <span>税込29,700円</span>
-            <small>税別3,000円の割引</small>
-          </div>
-        </aside>
-        <div class="additional-plans">
-          {pricing.items.map((item, i) => (
-            <div>
-              <span class="mono">OPTION / 0{i + 1}</span>
-              <div>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </div>
-              <span class="option-label">{i === 0 ? '個別見積もり' : '提供準備中'}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-grid wrap reveal" id="flow">
-    <Label number="05" label="HOW IT WORKS" />
-    <div>
-      <div class="flow-intro">
-        <div>
-          <h2 class="section-heading">{flow.title}</h2>
-          <a class="text-link" href="/about">
-            運営者について
-            <Arrow />
-          </a>
-        </div>
-        <p>{flow.text}</p>
-      </div>
-      <ol class="flow-list">
-        {flow.items.map((item, i) => (
-          <li>
-            <span class="step-number">0{i + 1}</span>
-            <div>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
-      <p class="section-note">
-        連絡は非同期中心、打合せは予約制。納期は対象を確認してご案内します。
+      <p class="dc-scope-note">
+        <strong>対象は、AIでつくったWebアプリです。</strong>{" "}
+        使用ツール・構成・規模を伺い、対応可否を事前に確認します。網羅的な脆弱性診断や、安全性の認証ではありません。
       </p>
     </div>
   </section>
-
-  <section class="section section-grid wrap reveal faq-section" id="faq">
-    <Label number="06" label="QUESTIONS" />
-    <div>
-      <h2 class="section-heading">{faq.title}</h2>
-      <div class="faq-list">
+  <section class="dc-section dc-tint" id="report">
+    <div class="dc-wrap">
+      <p class="dc-kicker">02 / 診断レポートの例</p>
+      <h2>
+        指摘だけで、
+        <br class="mobile-break" />
+        終わらせません。
+      </h2>
+      <div class="dc-report-layout">
+        <div class="dc-report-intro">
+          <h3>
+            自分で直すための、
+            <br />
+            道しるべ。
+          </h3>
+          <p>
+            問題の内容だけでなく、なぜ問題なのかという根拠、影響、具体的な改善手順、直した後の確認方法まで。
+          </p>
+          <p>自分で判断して進められるように、分かりやすくまとめます。</p>
+          <p class="dc-report-note">
+            このレポートは説明用の架空例です。実際の診断内容は、対象と合意した範囲によって異なります。
+          </p>
+        </div>
+        <article
+          class="dc-report-detail"
+          aria-labelledby="report-example-title"
+        >
+          <div class="dc-preview-bar">
+            <span>診断レポート / 抜粋</span>
+            <span class="dc-sample-tag">サンプル</span>
+          </div>
+          <div class="dc-report-title">
+            <span class="dc-status-high">優先度 高</span>
+            <h3 id="report-example-title">
+              他の利用者の予約が
+              <br class="mobile-break" />
+              見える可能性
+            </h3>
+          </div>
+          <dl>
+            <div>
+              <dt>確認したこと</dt>
+              <dd>
+                予約一覧の取得処理で、ログイン中の利用者に応じたアクセス制限が不足していました。
+              </dd>
+            </div>
+            <div>
+              <dt>影響</dt>
+              <dd>
+                別の利用者の予約情報が、閲覧できてしまう可能性があります。
+              </dd>
+            </div>
+            <div>
+              <dt>改善の手順</dt>
+              <dd>
+                <ol>
+                  <li>
+                    サーバー側で、ログイン中の利用者が閲覧できる予約だけを返す。
+                  </li>
+                  <li>
+                    予約の詳細・編集・削除の処理にも、同じ権限確認を適用する。
+                  </li>
+                </ol>
+              </dd>
+            </div>
+            <div>
+              <dt>修正後の確認</dt>
+              <dd>
+                別々のテストアカウントで、自分の予約だけが見えることを確認。別の利用者の予約IDを指定しても、取得・変更できないことを確かめます。
+              </dd>
+            </div>
+            <div>
+              <dt>未確認のこと</dt>
+              <dd>
+                今回の合意範囲外の管理者機能と、外部連携の権限設定。追加で確認すべき箇所として記録します。
+              </dd>
+            </div>
+          </dl>
+        </article>
+      </div>
+      <p class="dc-report-footer">
+        診断レポート・改善の手順・修正後の確認方法・未確認事項を、説明とあわせてお渡しします。
+      </p>
+    </div>
+  </section>
+  <section class="dc-section" id="operator">
+    <div class="dc-wrap">
+      <Operator />
+    </div>
+  </section>
+  <section class="dc-section dc-tint" id="pricing">
+    <div class="dc-wrap">
+      <p class="dc-kicker">03 / 料金</p>
+      <h2>
+        まずは診断。
+        <br class="mobile-break" />
+        その先は、必要な分だけ。
+      </h2>
+      <p class="dc-section-lead">
+        診断と説明だけでも依頼できます。修正の追加依頼は必須ではありません。
+      </p>
+      <div class="dc-pricing">
+        <div class="dc-pricing-main">
+          <div class="dc-pricing-amount">
+            <h3>診断・アドバイス</h3>
+            <p>
+              <strong>33,000</strong>
+              <span>円（税込）</span>
+            </p>
+            <small>税別30,000円 / 1アプリ・合意した範囲</small>
+          </div>
+          <ul class="dc-pricing-includes">
+            <li>根拠付きの診断レポート</li>
+            <li>自分で直す手順・確認方法</li>
+            <li>診断結果の説明</li>
+          </ul>
+          <a class="button" href="#contact" data-event="cta_click">
+            診断を相談する <Arrow />
+          </a>
+        </div>
+        <div class="dc-pricing-terms">
+          <p>
+            <strong>
+              通常、個人で作成したWebアプリの診断は、この金額を超えません。
+            </strong>{" "}
+            規模が大きく複雑な場合に限り、着手前に別途お見積もりし、ご了承いただいてから開始します。
+          </p>
+          <dl>
+            <div>
+              <dt>範囲・納期</dt>
+              <dd>対象を確認し、ご依頼前に合意します。</dd>
+            </div>
+            <div>
+              <dt>説明・質問</dt>
+              <dd>説明方法、質問や再確認の回数は事前に合意します。</dd>
+            </div>
+            <div>
+              <dt>お支払い</dt>
+              <dd>診断後の請求書払い。銀行振込・カード決済に対応。</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+      <div class="dc-pricing-extras">
+        <div>
+          <h3>修正・公開作業は、必要な分だけ。</h3>
+          <p>
+            ご自身での修正と組み合わせて相談できます。対応範囲を決めて、別途お見積もりします。継続保守は提供準備中です。
+          </p>
+        </div>
+        <details>
+          <summary>事例掲載へのご協力による割引について</summary>
+          <p>
+            診断後のアンケート回答と事例掲載の許可で、税別3,000円引き。通常料金の場合は29,700円（税込）です。公開範囲と掲載原稿は公開前に確認・承認いただきます。高評価は条件ではありません。通常料金で非公開の診断も選べます。
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+  <section class="dc-section" id="flow">
+    <div class="dc-wrap">
+      <p class="dc-kicker">04 / ご相談から診断まで</p>
+      <h2>
+        つくる主役は、
+        <br class="mobile-break" />
+        これからも、あなたです。
+      </h2>
+      <ol class="dc-flow">
+        {steps.map((item, i) => (
+          <li>
+            <span>0{i + 1}</span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </li>
+        ))}
+      </ol>
+      <p class="dc-small-note">
+        連絡は非同期中心、打合せは予約制です。24時間の有人対応・即時復旧は行っていません。
+      </p>
+    </div>
+  </section>
+  <section class="dc-section dc-tint" id="faq">
+    <div class="dc-wrap dc-faq-grid">
+      <div>
+        <p class="dc-kicker">05 / よくある質問</p>
+        <h2>
+          相談の前に、
+          <br />
+          知っておきたいこと。
+        </h2>
+      </div>
+      <div class="dc-faq">
         {faq.items.map((item) => (
           <details>
             <summary>
-              <span class="question-mark">Q.</span>
+              <span aria-hidden="true">Q.</span>
               {item.title}
-              <span class="faq-plus" aria-hidden="true"></span>
             </summary>
-            <div class="faq-answer">
-              <p>{item.text}</p>
-            </div>
+            <p>{item.text}</p>
           </details>
         ))}
       </div>
     </div>
   </section>
-
-  <section class="blog-strip wrap reveal">
-    <div>
-      <span class="mono">TECH JOURNAL</span>
-      <h2>自分でつくる人の、運用ノート。</h2>
-      <p>アプリの安全対策や運用のヒントを、少しずつ。</p>
-    </div>
-    <a class="text-link" href="/app-clinic/blog">
-      Techブログを読む
-      <Arrow />
-    </a>
-  </section>
-
-  <section class="contact-section" id="contact">
-    <div class="section wrap contact-grid">
-      <div class="contact-copy">
-        <Label number="07" label="LET’S TALK" />
-        <h2 class="section-heading">{contact.title}</h2>
-        <p>{contact.text}</p>
-        <div class="contact-info">
-          <span class="mono">CONTACT</span>
-          <a href="mailto:info@therethere.studio">info@therethere.studio ↗</a>
+  <section class="dc-section dc-contact" id="contact">
+    <div class="dc-wrap dc-contact-grid">
+      <div>
+        <p class="dc-kicker">LET’S TALK</p>
+        <h2>
+          今のアプリのこと、
+          <br />
+          聞かせてください。
+        </h2>
+        <p>
+          何を見てもらうか決まっていなくても大丈夫。
+          <br />
+          作ったものと、気になっていることから
+          <br class="desktop-break" />
+          ご相談ください。
+        </p>
+        <div class="dc-contact-assurance">
           <p>
-            診断料金：{price.title}円（税別）／税込{price.taxIncluded}円
-            <br />
+            <strong>診断・アドバイス 33,000円（税込）</strong>
+          </p>
+          <p>
             送信だけでは契約・課金は発生しません。
+            <br />
+            対象・費用・納期に納得してから依頼できます。
           </p>
         </div>
       </div>
       <ContactForm />
     </div>
   </section>
+  <section class="dc-journal dc-wrap">
+    <div>
+      <p class="dc-kicker">TECH JOURNAL</p>
+      <h2>自分でつくる人の、運用ノート。</h2>
+      <p>アプリ開発と、公開後の運用のヒント。</p>
+    </div>
+    <a class="text-link" href="/app-clinic/blog">
+      記事を読む <Arrow />
+    </a>
+  </section>
 </Layout>
-
-<style>
-  .case-discount {
-    margin-top: 30px;
-    padding: 28px;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 28px;
-    border-block: 2px solid var(--edge);
-  }
-  .case-discount h3 {
-    margin: 10px 0 14px;
-    font-size: 22px;
-    line-height: 1.6;
-  }
-  .case-discount p {
-    font-size: 14px;
-    line-height: 1.9;
-  }
-  .case-discount p + p {
-    margin-top: 10px;
-  }
-  .case-discount-price {
-    min-width: 220px;
-  }
-  .case-discount-price span,
-  .case-discount-price small {
-    display: block;
-    font-size: 13px;
-    line-height: 1.9;
-  }
-  .case-discount-price strong {
-    font: 800 36px var(--display);
-    letter-spacing: -0.04em;
-  }
-  .case-discount-price p {
-    margin-block: 8px;
-  }
-  @media (max-width: 700px) {
-    .case-discount {
-      grid-template-columns: 1fr;
-      padding: 24px 4px;
-      gap: 20px;
-    }
-    .case-discount h3 {
-      font-size: 20px;
-    }
-  }
-</style>
