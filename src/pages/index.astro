@@ -1,0 +1,46 @@
+---
+export const prerender = true;
+import Layout from '../layouts/Layout.astro';
+import Contact from '../components/Contact.astro';
+import Arrow from '../components/Arrow.astro';
+import { ja } from '../data/ja';
+import { renderParts } from '../lib/render';
+---
+<Layout>
+  <section class="studio-hero">
+    <div class="wrap studio-hero-inner">
+      <div class="studio-hero-copy">
+        <p class="studio-wordmark">There There<span>Studio.</span></p>
+        <h1>暮らしのそばに、<br /><em>使いたくなる</em>アプリを。</h1>
+        <p class="studio-lead">小さな「こんなのがあったら」を、使えるかたちに。<br class="desktop-break" />つくばを拠点に、WebとiOSのアプリをつくっています。</p>
+        <a class="button" href="#works">つくっているものを見る <Arrow /></a>
+      </div>
+      <div class="studio-hero-visual" aria-label="開発したiOSアプリの実画面">
+        <figure class="hero-phone phone-back"><img src="/images/checklist/run.webp" width="900" height="1955" alt="チェックリスト維新：声で進めるチェックリスト" fetchpriority="high" /></figure>
+        <figure class="hero-phone phone-front"><img src="/images/recorder/record.webp" width="720" height="1558" alt="レコーダー維新：音声で操作する録音アプリ" fetchpriority="high" /></figure>
+        <span class="visual-caption">アイデアから、あなたの手元へ。</span>
+      </div>
+    </div>
+    <div class="studio-band"><span>Webアプリ</span><span aria-hidden="true">＋</span><span>iOSアプリ</span><span aria-hidden="true">＋</span><span>つくる人の運用支援</span></div>
+  </section>
+  <section id="works" class="section wrap works-section">
+    <div class="works-heading reveal"><div><span class="section-label">つくっているもの</span><h2>Works<span class="accent">.</span></h2></div><p>毎日を少し良くする道具と、<br />つくり続けるためのサービス。</p></div>
+    <div class="works-grid">
+      <article class="work-item reveal">
+        <a class="work-media kaiju-media" href="https://kaijustamps.com/ja" target="_blank" rel="noopener noreferrer" aria-label="怪獣スタンプのサイトを見る（新しいタブ）"><img class="kaiju-wordmark" src="/images/kaiju-wordmark.webp" width="768" height="193" alt="怪獣スタンプ" loading="lazy" /><img class="kaiju-wallet" src="/images/kaiju-wallet.webp" width="560" height="1218" alt="Apple Walletのデジタルスタンプカード" loading="lazy" /><span class="work-open" aria-hidden="true">↗</span></a>
+        <div class="work-caption"><span class="mono">01 / Webアプリ</span><h3><a href="https://kaijustamps.com/ja" target="_blank" rel="noopener noreferrer">怪獣スタンプ ↗</a></h3><p set:html={renderParts(ja.home.works[0].description)} /></div>
+      </article>
+      <article class="work-item reveal">
+        <a class="work-media clinic-media" href="/app-clinic" aria-label="AIアプリ診療所の紹介を見る"><img src="/brand/logo-banner-neoflux.png" width="1200" height="400" alt="AIアプリ診療所" loading="lazy" /><span class="clinic-media-note">つくる楽しさに、運用の安心を。</span><span class="work-open" aria-hidden="true">↗</span></a>
+        <div class="work-caption"><span class="mono">02 / 診断・運用支援</span><h3><a href="/app-clinic">AIアプリ診療所</a></h3><p>AIでつくったアプリの、気になるところを一緒に確認。<br />改善の優先順位から、自分で直す手順まで。</p></div>
+      </article>
+      {(['recorder', 'checklist'] as const).map((key, i) => {
+        const product = ja[key];
+        return <article class="work-item reveal"><a class:list={['work-media', 'ios-media', key]} href={`/${key}`} aria-label={`${product.name}の紹介を見る`}><img class="work-splash" src={product.poster.src} width={product.poster.width} height={product.poster.height} alt={product.posterAlt} loading="lazy" /><img class="work-screen" src={product.frames[1].src} width={product.frames[1].width} height={product.frames[1].height} alt={product.frames[1].alt} loading="lazy" /><span class="work-open" aria-hidden="true">↗</span></a><div class="work-caption"><span class="mono">0{i+3} / iOSアプリ</span><h3><a href={`/${key}`}>{product.name}</a></h3><p set:html={renderParts(ja.home.works[i+1].description)} /><a class="text-link work-store" href={product.storeHref} target="_blank" rel="noopener noreferrer">App Storeで入手 ↗</a></div></article>;
+      })}
+    </div>
+  </section>
+  <section class="studio-about" id="about"><div class="section wrap studio-about-grid reveal"><div><span class="section-label">スタジオについて</span><h2>自分たちの実感から、<br />誰かの使いたいへ。</h2></div><div><p>お店を営むこと。音楽を楽しむこと。<br />日々の経験から生まれた気づきを、使う人に寄り添う道具に変えていきます。</p><p>企画から開発、公開後の改善まで。小さな開発スタジオだからこそ、手を動かしながら、ひとつずつ育てています。</p><a class="text-link" href="/about">運営について <Arrow /></a></div></div></section>
+  <section class="blog-strip wrap"><div><span class="mono">スタジオのブログ</span><h2>つくること、育てること。</h2><p>アプリ開発のこと。公開後の運用のこと。</p></div><a class="text-link" href="/blog">記事を読む <Arrow /></a></section>
+  <Contact />
+</Layout>

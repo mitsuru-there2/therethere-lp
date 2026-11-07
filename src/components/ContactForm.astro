@@ -1,0 +1,157 @@
+---
+import { env } from 'cloudflare:workers';
+import Arrow from './Arrow.astro';
+import { isGoogleChatWebhook } from '../lib/contact.mjs';
+const enabled =
+  String(env.CONTACT_ENABLED) !== 'false' && isGoogleChatWebhook(env.GOOGLE_CHAT_CONTACT_WEBHOOK_URL);
+---
+
+<form
+  id="contact-form"
+  class="contact-form"
+  action="/api/app-clinic/contact"
+  method="post"
+  data-enabled={String(enabled)}
+>
+  {!enabled && (
+    <div class="form-notice">
+      <b>フォーム受付は準備中です。</b>
+      <p>
+        現在は <a href="mailto:info@therethere.studio">メールでご相談</a>いただけます。
+      </p>
+    </div>
+  )}
+  <div class="form-two">
+    <label>
+      お名前・活動名 <span>必須</span>
+      <input name="name" autocomplete="name" maxlength="100" required placeholder="山田 太郎" />
+    </label>
+    <label>
+      メールアドレス <span>必須</span>
+      <input
+        type="email"
+        name="email"
+        autocomplete="email"
+        maxlength="254"
+        required
+        placeholder="you@example.com"
+      />
+    </label>
+  </div>
+  <fieldset>
+    <legend>
+      アプリの状況 <span>必須</span>
+    </legend>
+    <div class="radio-group">
+      <label>
+        <input type="radio" name="stage" value="before" required />
+        公開前
+      </label>
+      <label>
+        <input type="radio" name="stage" value="live" />
+        運用中
+      </label>
+      <label>
+        <input type="radio" name="stage" value="changed" />
+        変更後
+      </label>
+    </div>
+  </fieldset>
+  <label>
+    相談したいこと <span>必須</span>
+    <textarea
+      name="message"
+      rows="4"
+      maxlength="4000"
+      minlength="10"
+      required
+      placeholder="例：社内で使う予約アプリを作りました。利用者ごとのデータの見え方が気になっています。"
+    ></textarea>
+  </label>
+  <label>
+    希望する支援 <span>必須</span>
+    <select name="support" required>
+      <option value="" disabled selected>
+        選択してください
+      </option>
+      <option value="diagnosis">診断とアドバイス</option>
+      <option value="repair">修正や公開も相談したい</option>
+      <option value="maintenance">保守も相談したい</option>
+      <option value="unsure">まだ分からない</option>
+    </select>
+  </label>
+  <label>
+    URLや使用ツール <span class="optional">任意</span>
+    <input
+      name="tools"
+      maxlength="1000"
+      placeholder="アプリのURL、使ったAIツールなど。分かる範囲で。"
+    />
+  </label>
+  <div class="honeypot" aria-hidden="true">
+    <label>
+      Website
+      <input name="website" tabindex="-1" autocomplete="off" />
+    </label>
+  </div>
+  <p class="form-help">パスワード、APIキー、個人情報を含む実データは入力しないでください。</p>
+  <p class="form-help">入力内容は受付用データベースに保存し、運営者のGoogle Chatへ通知します。</p>
+  <label class="consent">
+    <input type="checkbox" name="consent" value="yes" required />
+    <span>
+      <a href="/site-privacy" target="_blank" rel="noopener">
+        プライバシーポリシー（別タブ）
+      </a>
+      を確認し、相談への回答のために情報を利用することに同意します。
+    </span>
+  </label>
+  <p id="form-status" role="status" aria-live="polite"></p>
+  <button class="button form-submit" type="submit" disabled={!enabled}>
+    {enabled ? '相談内容を送信する' : 'フォーム受付準備中'}
+    <Arrow />
+  </button>
+  <p class="form-help">詳細診断は有料です。対象・費用・納期を確認してから、ご依頼いただけます。</p>
+<noscript><p>フォームの送信にはJavaScriptが必要です。<a href="mailto:info@therethere.studio">メールでご相談ください。</a></p></noscript>
+</form>
+<script>
+  const form = document.querySelector<HTMLFormElement>('#contact-form');
+  const emit = (event: string) =>
+    window.dispatchEvent(
+      new CustomEvent('clinic:analytics', { detail: { event, path: location.pathname } }),
+    );
+  form?.addEventListener('input', () => emit('form_start'), { once: true });
+  let requestId = crypto.randomUUID();
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const status = document.querySelector<HTMLElement>('#form-status')!;
+    if (form.dataset.enabled !== 'true') {
+      status.textContent = 'フォーム受付は準備中です。メールでご相談ください。';
+      return;
+    }
+    const button = form.querySelector<HTMLButtonElement>('[type=submit]')!;
+    button.disabled = true;
+    status.textContent = '送信しています…';
+    try {
+      const body = Object.fromEntries(new FormData(form));
+      const response = await fetch('/api/app-clinic/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Idempotency-Key': requestId },
+        body: JSON.stringify(body),
+      });
+      const result = (await response.json()) as { message?: string; reference?: string };
+      if (!response.ok)
+        throw new Error(
+          result.message || '送信できませんでした。時間をおいてもう一度お試しください。',
+        );
+      if (!result.reference) throw new Error('受付番号を確認できませんでした。再送してください。');
+      emit('form_success');
+      requestId = crypto.randomUUID();
+      location.assign(`/app-clinic/thanks?reference=${encodeURIComponent(result.reference)}`);
+    } catch (error) {
+      emit('form_error');
+      status.textContent =
+        error instanceof Error ? error.message : '送信できませんでした。入力は保持されています。';
+      button.disabled = false;
+    }
+  });
+</script>

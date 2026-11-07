@@ -1,0 +1,46 @@
+---
+export const prerender = false;
+import Layout from '../../layouts/Layout.astro';
+import { env } from 'cloudflare:workers';
+const reference = Astro.url.searchParams.get('reference');
+let valid = false;
+if (reference && /^[a-f0-9-]{36}$/.test(reference)) {
+  try {
+    valid = Boolean(
+      await env.DB.prepare('SELECT id FROM clinic_inquiries WHERE id = ?').bind(reference).first(),
+    );
+  } catch {
+    /* Do not claim receipt if persistence cannot be confirmed. */
+  }
+}
+Astro.response.headers.set('Cache-Control', 'no-store');
+---
+
+<Layout clinic title="ご相談の受付｜AIアプリ診療所" noindex>
+  <div class="page-wrap thanks">
+    <img src="/brand/symbol-neoflux.png" alt="" width="80" height="80" />
+    <h1 class="page-title">{valid ? 'ご相談を受け付けました。' : 'ご相談はこちらから。'}</h1>
+    {valid ? (
+      <>
+        <p>
+          内容を確認のうえ、入力いただいたメールアドレスへ
+          <br />
+          対応可否と次の手順をご案内します。
+        </p>
+        <p>
+          受付番号：<code>{reference}</code>
+        </p>
+        <p>
+          送信だけでは契約・課金は発生しません。
+          <br />
+          お問い合わせ：<a href="mailto:info@therethere.studio">info@therethere.studio</a>
+        </p>
+      </>
+    ) : (
+      <p>アプリの状況と、気になっていることをお聞かせください。</p>
+    )}
+    <a class="button" href={valid ? '/app-clinic' : '/app-clinic#contact'}>
+      {valid ? 'ホームへ戻る' : '診断について相談する'} →
+    </a>
+  </div>
+</Layout>

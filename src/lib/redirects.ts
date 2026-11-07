@@ -1,0 +1,22 @@
+export const legacyRedirects: Record<string, string> = {
+  "/ja": "/",
+  "/ja/": "/",
+  "/privacy": "/recorder/privacy",
+  "/privacy/": "/recorder/privacy",
+  "/ja/privacy": "/recorder/privacy",
+  "/ja/privacy/": "/recorder/privacy",
+  "/app-clinic/about": "/about",
+  "/app-clinic/about/": "/about",
+  "/app-clinic/privacy": "/site-privacy",
+  "/app-clinic/privacy/": "/site-privacy",
+  "/ja/recorder": "/recorder",
+  "/ja/recorder/": "/recorder",
+  "/ja/checklist": "/checklist",
+  "/ja/checklist/": "/checklist",
+  "/ja/site-privacy": "/site-privacy",
+  "/ja/site-privacy/": "/site-privacy",
+  "/ja/recorder/privacy": "/recorder/privacy",
+  "/ja/recorder/privacy/": "/recorder/privacy",
+  "/ja/checklist/privacy": "/checklist/privacy",
+  "/ja/checklist/privacy/": "/checklist/privacy"
+};

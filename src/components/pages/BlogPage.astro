@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getEmDashCollection } from 'emdash';
+import { blogFilter, pageNumber, PAGE_SIZE, postHref } from '../../lib/blog';
+interface Props { clinic?: boolean; }
+const { clinic = false } = Astro.props;
+const page = pageNumber(Astro.url.searchParams.get('page'));
+const { entries, error } = await getEmDashCollection('posts', blogFilter(clinic, page));
+const posts = entries.slice(0, PAGE_SIZE);
+const more = entries.length > PAGE_SIZE;
+const base = clinic ? '/app-clinic/blog' : '/blog';
+if (error) { Astro.response.status = 503; Astro.response.headers.set('Cache-Control', 'no-store'); }
+else if (page > 1 && !posts.length) Astro.response.status = 404;
+---
+<Layout clinic={clinic} title={`${clinic ? 'AIアプリ診療所のブログ' : 'ブログ'}｜There There Studio`} description={clinic ? 'アプリの安全対策や公開後の運用、自分で改善するためのヒント。' : 'There There Studioのアプリ開発、制作アプリのお知らせ、運用のヒント。'} canonicalPath={page > 1 ? `${base}?page=${page}` : base} noindex={!!error || (page > 1 && !posts.length)}>
+  <div class="page-wrap">
+    <p class="breadcrumb"><a href="/">ホーム</a> / {clinic && <><a href="/app-clinic">AIアプリ診療所</a> / </>}ブログ</p>
+    <h1 class="page-title">{clinic ? <>自分でつくる人の、<br />運用ノート。</> : <>つくること、<br />育てること。</>}</h1>
+    <p class="page-lead">{clinic ? 'アプリの安全対策、公開後の運用、機能を変えるときの確認。自分で判断し、改善するためのヒントをお届けします。' : 'アプリ開発のこと、制作アプリのお知らせ、公開後の運用のこと。スタジオからお届けします。'}</p>
+    <nav class="blog-tabs" aria-label="ブログの種類"><a href="/blog" aria-current={!clinic ? 'page' : undefined}>すべての記事</a><a href="/app-clinic/blog" aria-current={clinic ? 'page' : undefined}>AIアプリ診療所</a></nav>
+    {error ? <div class="empty-state"><h2>記事を取得できませんでした。</h2><p>時間をおいて、もう一度お試しください。</p><a class="text-link" href={base}>再読み込み →</a></div> : posts.length ? <div class="blog-list">{posts.map(post => <a class="blog-entry" href={postHref(post)}><span class="mono">{post.data.publishedAt && post.data.publishedAt.toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' })}</span><h2>{String(post.data.title)}</h2><p>{String(post.data.excerpt || '')}</p><span class="text-link">記事を読む →</span></a>)}</div> : <div class="empty-state"><h2>{page > 1 ? 'このページの記事はありません。' : '最初の記事を、準備中です。'}</h2><p>{clinic ? '公開までの間、診断内容やサービスのご案内をご覧ください。' : 'アプリの紹介は、Worksからご覧いただけます。'}</p><a class="text-link" href={page > 1 ? base : clinic ? '/app-clinic#diagnosis' : '/#works'}>{page > 1 ? '最初のページへ' : clinic ? '診断内容を見る' : 'Worksを見る'} →</a></div>}
+    {!error && <nav class="pagination" aria-label="記事一覧のページ">{page > 1 && <a class="text-link" href={page === 2 ? base : `${base}?page=${page-1}`}>← 前のページ</a>}{more && <a class="text-link" href={`${base}?page=${page+1}`}>次のページ →</a>}</nav>}
+  </div>
+</Layout>

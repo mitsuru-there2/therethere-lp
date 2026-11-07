@@ -1,0 +1,64 @@
+{
+  "version": "1",
+  "defaultLocale": "ja",
+  "meta": {
+    "name": "There There Studio",
+    "description": "スタジオ共通ブログ。app-clinicタグでAIアプリ診療所にも掲載。"
+  },
+  "settings": {
+    "title": "There There Studio",
+    "timezone": "Asia/Tokyo",
+    "url": "https://therethere.studio"
+  },
+  "collections": [
+    {
+      "slug": "posts",
+      "label": "ブログ",
+      "supports": [
+        "drafts",
+        "revisions",
+        "scheduling",
+        "seo"
+      ],
+      "urlPattern": "/blog/{slug}",
+      "fields": [
+        {
+          "slug": "title",
+          "label": "タイトル",
+          "type": "string",
+          "required": true
+        },
+        {
+          "slug": "excerpt",
+          "label": "概要",
+          "type": "text"
+        },
+        {
+          "slug": "content",
+          "label": "本文",
+          "type": "portableText"
+        }
+      ]
+    }
+  ],
+  "content": {
+    "posts": []
+  },
+  "taxonomies": [
+    {
+      "name": "tag",
+      "label": "タグ",
+      "labelSingular": "タグ",
+      "hierarchical": false,
+      "collections": [
+        "posts"
+      ],
+      "terms": [
+        {
+          "slug": "app-clinic",
+          "label": "AIアプリ診療所"
+        }
+      ]
+    }
+  ]
+}

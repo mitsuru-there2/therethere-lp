@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getEmDashEntry } from 'emdash';
+import { PortableText } from 'emdash/ui';
+import { isClinicPost, postHref } from '../../lib/blog';
+const { entry, error } = await getEmDashEntry('posts', Astro.params.slug!);
+if (error) return new Response('記事を取得できませんでした。時間をおいてお試しください。', { status: 503, headers: { 'Cache-Control': 'no-store' } });
+if (!entry || entry.data.status !== 'published') return Astro.rewrite('/404');
+const clinic = isClinicPost(entry);
+const canonicalPath = postHref(entry);
+if (Astro.url.pathname.replace(/\/$/, '') !== canonicalPath) return Astro.redirect(canonicalPath, 301);
+---
+<Layout title={`${String(entry.data.title)}｜There There Studio`} description={String(entry.data.excerpt || '')} canonicalPath={canonicalPath}>
+  <article class="page-wrap">
+    <p class="breadcrumb"><a href="/blog">ブログ</a> / 記事</p>
+    {clinic && <p class="post-tags"><a href="/app-clinic/blog">AIアプリ診療所</a></p>}
+    <h1 class="page-title">{String(entry.data.title)}</h1><p class="page-lead">{String(entry.data.excerpt || '')}</p>
+    <div class="prose"><PortableText value={entry.data.content ?? []} /></div>
+    {clinic && <div class="empty-state"><h2>自分のアプリの場合は、どうだろう。</h2><p>判断に迷ったら、今の状況からご相談ください。</p><a class="button" href="/app-clinic#contact">診断について相談する →</a></div>}
+    <a class="text-link" href={clinic ? '/app-clinic/blog' : '/blog'}>← 記事一覧に戻る</a>
+  </article>
+</Layout>

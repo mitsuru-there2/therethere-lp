@@ -1,0 +1,2 @@
+# Same incoming webhook used by kaijustamps. Keep this server-side.
+GOOGLE_CHAT_CONTACT_WEBHOOK_URL=

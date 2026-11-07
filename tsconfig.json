@@ -1,0 +1,15 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [
+    ".astro/types.d.ts",
+    "src/**/*",
+    "worker-configuration.d.ts",
+    "emdash-env.d.ts"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "worker",
+    "tests"
+  ]
+}

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /_emdash/
+Disallow: /api/
+Sitemap: https://therethere.studio/sitemap.xml

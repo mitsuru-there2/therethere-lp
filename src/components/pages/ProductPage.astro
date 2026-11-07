@@ -1,0 +1,129 @@
+---
+import Arrow from '../ProductArrow.astro';
+import Layout from '../../layouts/Layout.astro';
+import { ja } from '../../data/ja';
+import { renderParts } from '../../lib/render';
+import type { ProductCopy } from '../../data/types';
+interface Props { product: 'recorder' | 'checklist'; }
+const { product } = Astro.props;
+const copy: ProductCopy = ja[product];
+const badge = '/images/recorder/app-store-badge.svg';
+const support = '/#contact';
+---
+<Layout title={copy.metaTitle} description={copy.metaDescription}>
+  <section class="recorder-hero wrap">
+    <div class="recorder-hero-copy">
+      <h1>{copy.name}</h1>
+      <p class="recorder-tagline" set:html={renderParts(copy.tagline)} />
+      <p class="body-copy" set:html={renderParts(copy.lead)} />
+      {copy.storeHref ? (
+        <a class="store-badge" href={copy.storeHref} target="_blank" rel="noopener noreferrer" aria-label={copy.storeLabel}>
+          <img src={badge} width={109} height="40" alt="" />
+        </a>
+      ) : (
+        <button class="store-badge" type="button" disabled aria-label={copy.storeLabel}>
+          <img src={badge} width={109} height="40" alt="" />
+        </button>
+      )}
+      <p class="small-copy compatibility">{copy.compatibility}</p>
+    </div>
+    <figure class="poster-shot">
+      <img src={copy.poster.src} alt={copy.posterAlt} width={copy.poster.width} height={copy.poster.height} fetchpriority="high" />
+    </figure>
+  </section>
+
+  <section class="section story" aria-labelledby="story-title">
+    <div class="wrap story-head">
+      <h2 id="story-title" class="japanese-display reveal">{copy.storyTitle}</h2>
+      <div class="story-nav">
+        <button type="button" data-story="prev" aria-label={copy.prevLabel}><Arrow class="story-arrow story-arrow-back" /></button>
+        <button type="button" data-story="next" aria-label={copy.nextLabel}><Arrow /></button>
+      </div>
+    </div>
+    <div class="story-rail" tabindex="0" aria-label={copy.storyLabel}>
+      {copy.frames.map((frame) => (
+        <figure class="story-frame">
+          <img src={frame.src} alt={frame.alt} width={frame.width} height={frame.height} loading="lazy" />
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <section id="features" class="section wrap" aria-labelledby="features-title">
+    <h2 id="features-title" class="japanese-display reveal">{copy.featuresTitle}</h2>
+    <div class="feature-list">
+      {copy.features.map((feature) => (
+        <article class="feature-row reveal">
+          <span class="feature-number">{feature.number}</span>
+          <h3>{feature.title}</h3>
+          <p>{feature.description}</p>
+        </article>
+      ))}
+    </div>
+    <p class="body-copy feature-note reveal">{copy.featureNote}</p>
+    <a class="text-link reveal" href={copy.privacyPath}>{copy.privacyLabel} <Arrow diagonal /></a>
+  </section>
+
+  <section class="section wrap faq" aria-labelledby="faq-title">
+    <div>
+      <h2 id="faq-title" class="display">FAQ</h2>
+      <p class="small-copy">{copy.faqLabel}</p>
+    </div>
+    <div>
+      {copy.faqs.map((faq) => (
+        <details>
+          <summary>{faq.q}</summary>
+          <p>{faq.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="section wrap store-close">
+    <div>
+      <h2 class="japanese-display">{copy.closeTitle}</h2>
+      <p class="small-copy compatibility">{copy.compatibility}</p>
+    </div>
+    <div class="store-close-actions">
+      {copy.storeHref ? (
+        <a class="store-badge" href={copy.storeHref} target="_blank" rel="noopener noreferrer" aria-label={copy.storeLabel}>
+          <img src={badge} width={109} height="40" alt="" />
+        </a>
+      ) : (
+        <button class="store-badge" type="button" disabled aria-label={copy.storeLabel}>
+          <img src={badge} width={109} height="40" alt="" />
+        </button>
+      )}
+      <a class="text-link" href={support}>{copy.supportLabel} <Arrow diagonal /></a>
+    </div>
+  </section>
+</Layout>
+<script>
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const rail = document.querySelector('.story-rail');
+  const nav = document.querySelector('.story-nav');
+  const buttons = [...document.querySelectorAll('[data-story]')];
+  const updateNav = () => {
+    if (!(rail instanceof HTMLElement) || !(nav instanceof HTMLElement)) return;
+    const max = rail.scrollWidth - rail.clientWidth;
+    nav.hidden = max <= 1;
+    buttons.forEach((button) => {
+      if (!(button instanceof HTMLButtonElement)) return;
+      const atStart = rail.scrollLeft <= 1;
+      const atEnd = rail.scrollLeft >= max - 1;
+      button.disabled = button.dataset.story === 'prev' ? atStart : atEnd;
+    });
+  };
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      if (!(rail instanceof HTMLElement)) return;
+      const frame = rail.querySelector('.story-frame');
+      const width = frame instanceof HTMLElement ? frame.getBoundingClientRect().width : 260;
+      const direction = button instanceof HTMLElement && button.dataset.story === 'next' ? 1 : -1;
+      rail.scrollBy({ left: direction * (width + 18), behavior: reduced ? 'auto' : 'smooth' });
+    });
+  });
+  rail?.addEventListener('scroll', updateNav, { passive: true });
+  window.addEventListener('resize', updateNav);
+  updateNav();
+</script>
