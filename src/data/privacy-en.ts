@@ -1,11 +1,13 @@
 import type { LegalCopy, TextPart } from './types';
+import { operator } from './operator';
 const br: TextPart = { br: 'always' };
 const link = (href: string, label: string): TextPart => ({ href, label });
 const mail: TextPart = { href: 'mailto:info@therethere.studio', label: 'info@therethere.studio' };
 
 const contactBlock: TextPart[] = [
   'There There Studio (There There)', br,
-  'Tsukuba, Ibaraki, Japan', br,
+  operator.addressEn, br,
+  'Phone: ', link(operator.phoneHref, operator.phone), br,
   'Email: ', mail, br,
   'Form: ', link('/#contact', 'Contact'),
 ];
@@ -16,9 +18,9 @@ export const englishPolicies = {
     metaDescription: 'The Recorder Ishin privacy policy. Microphone use, on-device recordings, sharing, backup, and deletion.',
     label: 'Recorder Ishin / Privacy Policy',
     title: 'Privacy policy',
-    updated: 'Adopted September 19, 2026. Last updated September 22, 2026.',
+    updated: 'Adopted September 19, 2026. Last updated November 10, 2026.',
     sections: [
-      { blocks: [{ p: ['There There (trade name and display name: There There Studio; location: Tsukuba, Ibaraki, Japan; “the studio”) sets out below how information is handled in the iOS app Recorder Ishin (レコーダー維新; “the app”). Checklist Ishin is covered by ', link('/checklist/privacy', 'a separate privacy policy'), '.'] }] },
+      { blocks: [{ p: [`There There (trade name and display name: There There Studio; location: ${operator.addressEn}; “the studio”) sets out below how information is handled in the iOS app Recorder Ishin (レコーダー維新; “the app”). Checklist Ishin is covered by `, link('/checklist/privacy', 'a separate privacy policy'), '.'] }] },
       { heading: '1. Approach', blocks: [{ p: ['The app is a personal audio recorder. Recording, audio processing, and playback happen on the device. No account is required. The app does not automatically send recordings to the studio’s servers.'] }] },
       { heading: '2. Microphone access', blocks: [
         { p: ['To record and to monitor in real time, the app uses the microphone with your permission. Audio from the microphone is processed on the device, including gain, equalization, and noise reduction. Audio is not sent to the studio or to an outside AI service for processing.'] },
@@ -58,9 +60,9 @@ export const englishPolicies = {
     metaDescription: 'The Checklist Ishin privacy policy. On-device speech recognition, photos, local notifications, and how lists and run history are stored and deleted.',
     label: 'Checklist Ishin / Privacy Policy',
     title: 'Privacy policy',
-    updated: 'Adopted September 22, 2026. Last updated September 22, 2026.',
+    updated: 'Adopted September 22, 2026. Last updated November 10, 2026.',
     sections: [
-      { blocks: [{ p: ['There There (trade name and display name: There There Studio; location: Tsukuba, Ibaraki, Japan; “the studio”) sets out below how information is handled in the iOS app Checklist Ishin (チェックリスト維新; “the app”). Recorder Ishin is covered by ', link('/recorder/privacy', 'a separate privacy policy'), '.'] }] },
+      { blocks: [{ p: [`There There (trade name and display name: There There Studio; location: ${operator.addressEn}; “the studio”) sets out below how information is handled in the iOS app Checklist Ishin (チェックリスト維新; “the app”). Recorder Ishin is covered by `, link('/recorder/privacy', 'a separate privacy policy'), '.'] }] },
       { heading: '1. Approach', blocks: [{ p: ['The app stores repeated procedures on the device and keeps a record of each run. There is no account, no cloud sync, and no connection to the studio’s servers. Lists, photos, audio, and history are not automatically sent to the studio’s servers.'] }] },
       { heading: '2. Microphone and speech recognition', blocks: [
         { p: ['In voice mode, the app uses the microphone and speech recognition, with your permission, to read items aloud and to recognize spoken cues. Speech is synthesized on the device. Recognition is required to run on the device. Audio, recognition results, and the spoken text are not sent to the studio or to an outside AI service.'] },
@@ -102,9 +104,9 @@ export const englishPolicies = {
     metaDescription: 'How There There Studio handles personal information on this website and in the contact form.',
     label: 'Website / Privacy',
     title: 'How this site handles personal information',
-    updated: 'Last updated September 22, 2026.',
+    updated: 'Last updated November 10, 2026.',
     sections: [
-      { blocks: [{ p: ['There There Studio (operated by There There; location: Tsukuba, Ibaraki, Japan) handles information received through this website and the contact form as follows. Information inside each app follows that app’s own policy. See the ', link('/recorder/privacy', 'Recorder Ishin privacy policy'), ' and the ', link('/checklist/privacy', 'Checklist Ishin privacy policy'), '.'] }] },
+      { blocks: [{ p: [`There There Studio (operated by There There; location: ${operator.addressEn}) handles information received through this website and the contact form as follows. Information inside each app follows that app’s own policy. See the `, link('/recorder/privacy', 'Recorder Ishin privacy policy'), ' and the ', link('/checklist/privacy', 'Checklist Ishin privacy policy'), '.'] }] },
       { heading: 'What the contact form receives, and why', blocks: [{ p: ['The form receives your name, email address, shop or company name (optional), topic, and message. This information is used to reply, to respond to a development inquiry, and to support an app or investigate a problem.'] }] },
       { heading: 'Services used', blocks: [{ p: ['The site is delivered and the form is processed with Cloudflare. The message is sent to Google Chat so the studio can read it. These services are used to provide the site and to respond to inquiries. What you submit is not sold or provided for advertising.'] }] },
       { heading: 'Access information and cookies', blocks: [{ p: ['To deliver the site and to limit abuse, Cloudflare may process an IP address, request information, and similar data. The contact rate limit uses the IP address. This site does not use its own advertising or analytics cookies.'] }] },

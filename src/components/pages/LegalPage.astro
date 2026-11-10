@@ -15,11 +15,11 @@ const isSite = page === 'sitePrivacy';
     <p class="section-label">{legal.label}</p>
     <h1>{legal.title}</h1>
     <a class="policy-jump" href="#english" lang="en">English version ↓</a>
-    <p class="updated">{isSite ? '最終更新日：2026年11月5日' : legal.updated}</p>
+    <p class="updated">{legal.updated}</p>
     {legal.sections.map(section => <section>{section.heading && <h2>{section.heading}</h2>}{section.blocks.map(block => 'ul' in block ? <ul>{block.ul.map(item => <li>{item}</li>)}</ul> : <p set:html={renderParts(block.p)} />)}</section>)}
     {isSite && <section><h2>AIアプリ診療所へのご相談</h2><p>本方針はAIアプリ診療所の相談フォームにも適用します。お名前・活動名、メールアドレス、アプリの状況、相談内容、希望する支援、URLや使用ツールを、対応可否の確認、お見積もり、ご依頼に関する連絡に利用します。</p><p>診療所フォームの情報は、受付番号・受付日時・同意の記録とともにCloudflareのデータベースへ保存し、Google Chatへ通知します。重複受付や不正利用の防止に、送信キーと、日ごとに変わるIPアドレスのハッシュを使用します。</p><p>初回のフォームにはパスワード、APIキー、個人情報を含む実データを送らないでください。コード・データの共有方法やAIツールの利用範囲は診断前に個別に確認します。現時点で外部のアクセス解析サービスは接続していません。</p></section>}
     <div class="english-policy" id="english" lang="en">
-      <h2>{english.title}</h2><p class="updated">{isSite ? 'Last updated: November 5, 2026' : english.updated}</p>
+      <h2>{english.title}</h2><p class="updated">{english.updated}</p>
       {english.sections.map(section => <section>{section.heading && <h2>{section.heading}</h2>}{section.blocks.map(block => 'ul' in block ? <ul>{block.ul.map(item => <li>{item}</li>)}</ul> : <p set:html={renderParts(block.p)} />)}</section>)}
       {isSite && <section><h2>AI App Clinic inquiries</h2><p>This policy also applies to the AI App Clinic inquiry form. We use your name, email address, app status, inquiry, requested support, URLs and tools to assess whether we can help, prepare estimates, and communicate about your request.</p><p>Clinic inquiries are stored in a Cloudflare database with a reference number, receipt time and consent record, and sent to the operator’s Google Chat space. We use a request key and a daily hash of your IP address to prevent duplicate submissions and abuse.</p><p>Do not include passwords, API keys or actual personal data in the initial inquiry. We agree on code and data sharing and the scope of AI tool use before diagnosis. No external analytics service is currently connected.</p></section>}
     </div>

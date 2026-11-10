@@ -1,5 +1,6 @@
 import { checklistStoreUrls } from '../data/checklist';
 import { recorderStoreUrls } from '../data/recorder';
+import { operator } from './operator';
 import type { SiteCopy, TextPart } from './types';
 
 const mobile: TextPart = { br: 'mobile' };
@@ -11,7 +12,8 @@ const newTab = '（新しいタブで開く）';
 
 const contactBlock: TextPart[] = [
   '運営：There There Studio（There There）', br,
-  '所在地：茨城県つくば市', br,
+  `所在地：${operator.address}`, br,
+  '電話：', link(operator.phoneHref, operator.phone), br,
   'メール：', mail, br,
   'フォーム：', link('/#contact', 'お問い合わせ'),
 ];
@@ -51,13 +53,13 @@ export const ja = {
     noscript: '送信後、確認画面に移動します。',
   },
   home: {
-    metaTitle: 'There There Studio — つくばのWEBアプリ開発スタジオ',
-    metaDescription: '茨城県つくば市のWEBアプリ開発スタジオ、There There Studio。怪獣スタンプ、レコーダー維新、チェックリスト維新など、暮らしのそばで使いたくなるアプリをつくっています。',
+    metaTitle: 'There There Studio — WEBアプリ開発スタジオ',
+    metaDescription: 'WEBアプリ開発スタジオ、There There Studio。怪獣スタンプ、レコーダー維新、チェックリスト維新など、暮らしのそばで使いたくなるアプリをつくっています。',
     heroTagline: ['暮らしのそばに、', mobile, '使いたくなるアプリを。'],
-    heroDescription: '茨城県つくば市のWEBアプリ開発スタジオ。',
+    heroDescription: 'WEBアプリ開発スタジオ。',
     worksAria: '制作したアプリを見る',
     about: [
-      ['わたしたちは、茨城県つくば市を拠点に、', desktop, '日々の暮らしを少し良くする、', desktop, '使いたくなるアプリをつくる', desktop, '小さな開発スタジオです。'],
+      ['わたしたちは、', desktop, '日々の暮らしを少し良くする、', desktop, '使いたくなるアプリをつくる', desktop, '小さな開発スタジオです。'],
       ['お店を営むこと。音楽を楽しむこと。', br, '自分たちの経験から生まれる気づきを、', desktop, '使う人に寄り添う道具に変えていきます。'],
     ],
     works: [
@@ -186,9 +188,9 @@ export const ja = {
     metaDescription: 'レコーダー維新のプライバシーポリシー。マイクの利用、録音データの端末内保存、共有、バックアップ、データ削除について説明します。',
     label: 'レコーダー維新 / Privacy Policy',
     title: 'プライバシーポリシー',
-    updated: '制定日：2026年9月19日／最終更新日：2026年9月22日',
+    updated: '制定日：2026年9月19日／最終更新日：2026年11月10日',
     sections: [
-      { blocks: [{ p: ['There There（屋号・表示名：There There Studio、所在地：茨城県つくば市。以下「当スタジオ」）は、iOSアプリ「レコーダー維新」（以下「本アプリ」）における情報の取り扱いを、以下のとおり定めます。チェックリスト維新は、', link('/checklist/privacy', '別のプライバシーポリシー'), 'で定めています。'] }] },
+      { blocks: [{ p: [`There There（屋号・表示名：There There Studio、所在地：${operator.address}。以下「当スタジオ」）は、iOSアプリ「レコーダー維新」（以下「本アプリ」）における情報の取り扱いを、以下のとおり定めます。チェックリスト維新は、`, link('/checklist/privacy', '別のプライバシーポリシー'), 'で定めています。'] }] },
       { heading: '1. 基本方針', blocks: [{ p: ['本アプリは、録音・音声処理・再生を端末内で行うパーソナル音声レコーダーです。アカウント登録は不要です。本アプリが録音データを当スタジオのサーバーに自動送信することはありません。'] }] },
       { heading: '2. マイクへのアクセス', blocks: [
         { p: ['録音とリアルタイム・モニタリングのため、利用者の許可を得てマイクにアクセスします。マイクからの音声は、端末内でゲイン調整、イコライザー、ノイズ低減等の処理に利用します。音声処理のために当スタジオや外部のAIサービスへ音声を送信することはありません。'] },
@@ -224,9 +226,9 @@ export const ja = {
     metaDescription: 'チェックリスト維新のプライバシーポリシー。端末内の音声認識、写真、ローカル通知、目録と実行履歴の保存と削除について説明します。',
     label: 'チェックリスト維新 / Privacy Policy',
     title: 'プライバシーポリシー',
-    updated: '制定日：2026年9月22日／最終更新日：2026年9月22日',
+    updated: '制定日：2026年9月22日／最終更新日：2026年11月10日',
     sections: [
-      { blocks: [{ p: ['There There（屋号・表示名：There There Studio、所在地：茨城県つくば市。以下「当スタジオ」）は、iOSアプリ「チェックリスト維新」（以下「本アプリ」）における情報の取り扱いを、以下のとおり定めます。レコーダー維新は、', link('/recorder/privacy', '別のプライバシーポリシー'), 'で定めています。'] }] },
+      { blocks: [{ p: [`There There（屋号・表示名：There There Studio、所在地：${operator.address}。以下「当スタジオ」）は、iOSアプリ「チェックリスト維新」（以下「本アプリ」）における情報の取り扱いを、以下のとおり定めます。レコーダー維新は、`, link('/recorder/privacy', '別のプライバシーポリシー'), 'で定めています。'] }] },
       { heading: '1. 基本方針', blocks: [{ p: ['本アプリは、繰り返す手順を端末内に保存し、実行のたびに記録を残すチェックリストです。アカウント登録、クラウド同期、当スタジオのサーバーへの通信機能はありません。目録、写真、音声、履歴を当スタジオのサーバーへ自動送信することはありません。'] }] },
       { heading: '2. マイクと音声認識', blocks: [
         { p: ['音声モードで項目を読み上げ、音声の合図を認識するために、利用者の許可を得てマイクと音声認識を使用します。読み上げは端末内の音声合成で行います。音声認識は、端末内での認識を必須として行います。音声、認識結果、読み上げ内容を当スタジオや外部のAIサービスへ送信することはありません。'] },
@@ -268,9 +270,9 @@ export const ja = {
     metaDescription: 'There There Studioのウェブサイトとお問い合わせフォームにおける個人情報の取り扱いについて。',
     label: 'Website / Privacy',
     title: 'サイトの個人情報の取り扱い',
-    updated: '最終更新日：2026年9月22日',
+    updated: '最終更新日：2026年11月10日',
     sections: [
-      { blocks: [{ p: ['There There Studio（運営：There There、所在地：茨城県つくば市）は、このウェブサイトおよびお問い合わせフォームで受け取る情報を、以下のとおり取り扱います。アプリ内の情報はアプリごとに別の方針です。', link('/recorder/privacy', 'レコーダー維新のプライバシーポリシー'), 'と、', link('/checklist/privacy', 'チェックリスト維新のプライバシーポリシー'), 'をご覧ください。'] }] },
+      { blocks: [{ p: [`There There Studio（運営：There There、所在地：${operator.address}）は、このウェブサイトおよびお問い合わせフォームで受け取る情報を、以下のとおり取り扱います。アプリ内の情報はアプリごとに別の方針です。`, link('/recorder/privacy', 'レコーダー維新のプライバシーポリシー'), 'と、', link('/checklist/privacy', 'チェックリスト維新のプライバシーポリシー'), 'をご覧ください。'] }] },
       { heading: 'お問い合わせで受け取る情報と利用目的', blocks: [{ p: ['お名前、メールアドレス、店舗名・会社名（任意）、お問い合わせの種類、本文を受け取ります。これらの情報は、お問い合わせへの返信、開発のご相談への対応、アプリのサポートや不具合調査に利用します。'] }] },
       { heading: '利用するサービス', blocks: [{ p: ['本サイトの配信とフォーム処理にはCloudflareを利用し、お問い合わせ内容はGoogle Chatへ送信して当スタジオが確認します。これらのサービスを、サイトの提供およびお問い合わせ対応のために利用します。入力内容を広告目的で販売・提供することはありません。'] }] },
       { heading: 'アクセス情報とCookie', blocks: [{ p: ['サイト配信と不正利用防止のため、CloudflareがIPアドレスやリクエスト情報等を処理する場合があります。お問い合わせの連投制限にはIPアドレスを使用します。本サイト独自の広告・行動解析Cookieは使用していません。'] }] },

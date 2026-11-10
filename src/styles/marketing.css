@@ -13,6 +13,15 @@
   box-shadow: none;
   background: white;
 }
+.brand img.clinic-logo {
+  display: block;
+  width: 240px;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
 .studio-wordmark-image {
   display: block;
   width: 100%;
@@ -27,6 +36,9 @@
   .brand img.studio-logo {
     width: 160px;
   }
+  .brand img.clinic-logo {
+    width: 198px;
+  }
   .studio-wordmark-image {
     margin-bottom: 24px;
   }
@@ -34,6 +46,9 @@
 .marketing-page .site-header {
   padding: 20px max(28px, calc((100vw - 1240px) / 2));
   min-height: 94px;
+}
+.clinic-page .site-header {
+  padding-block: 8px;
 }
 .marketing-page .site-header .brand > span:last-child {
   font-size: 25px;
@@ -816,18 +831,13 @@
   margin-bottom: 22px;
 }
 .featured-clinic h3 {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  font-size: 34px;
-  line-height: 1.4;
-  letter-spacing: -0.06em;
   margin: 0 0 18px;
 }
 .featured-clinic h3 > img {
-  flex-shrink: 0;
-  width: 50px;
-  height: 50px;
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
   mix-blend-mode: multiply;
 }
 .featured-clinic h4 {
@@ -839,15 +849,7 @@
 .featured-description {
   font-size: 15px;
   line-height: 1.95;
-}
-.featured-price {
-  font-size: 13px;
-  margin-top: 25px;
-  margin-bottom: 18px;
-}
-.featured-price strong {
-  font-family: var(--display);
-  font-size: 20px;
+  margin-bottom: 24px;
 }
 .featured-clinic .button {
   font-size: 14px;
@@ -955,13 +957,6 @@
   .featured-clinic {
     padding: 30px;
     gap: 30px;
-  }
-  .featured-clinic h3 {
-    font-size: 28px;
-  }
-  .featured-clinic h3 > img {
-    width: 42px;
-    height: 42px;
   }
   .featured-clinic h4 {
     font-size: 20px;
@@ -1145,13 +1140,6 @@
     gap: 30px;
     grid-template-columns: 1fr 1fr;
   }
-  .featured-clinic h3 {
-    font-size: 27px;
-  }
-  .featured-clinic h3 > img {
-    width: 40px;
-    height: 40px;
-  }
   .featured-clinic h4 {
     font-size: 21px;
   }
@@ -1194,6 +1182,9 @@
     padding: 16px 20px;
     min-height: 80px;
     gap: 12px;
+  }
+  .clinic-page .site-header {
+    padding-block: 8px;
   }
   .marketing-page .site-header .brand > span:last-child {
     font-size: 21px;
@@ -1556,27 +1547,12 @@
     font-size: 10px !important;
     margin-bottom: 20px;
   }
-  .featured-clinic h3 {
-    font-size: 27px;
-    gap: 8px;
-  }
-  .featured-clinic h3 > img {
-    width: 36px;
-    height: 36px;
-  }
   .featured-clinic h4 {
     font-size: 21px;
     margin-bottom: 15px;
   }
   .featured-description {
     font-size: 14px;
-  }
-  .featured-price {
-    font-size: 12px;
-    margin-top: 20px;
-  }
-  .featured-price strong {
-    font-size: 20px;
   }
   .featured-clinic .button {
     font-size: 13px;
@@ -1652,9 +1628,6 @@
   }
   .featured-clinic {
     padding-inline: 17px;
-  }
-  .featured-clinic h3 {
-    font-size: 23px;
   }
   .studio-home .studio-hero-visual {
     height: 335px;

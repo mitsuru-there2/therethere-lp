@@ -17,7 +17,7 @@ interface Props {
 }
 const {
   title = "There There Studio｜暮らしのそばに、使いたくなるアプリを。",
-  description = "茨城県つくば市のアプリ開発スタジオ。WebとiOSのアプリ開発から、AIアプリ診療所での診断・運用支援まで。",
+  description = "WebとiOSのアプリ開発スタジオ。アプリ開発から、AIアプリ診療所での診断・運用支援まで。",
   noindex = false,
   clinic: isClinic = false,
   landing = false,
@@ -61,7 +61,7 @@ const canonical = new URL(
       content={
         new URL(
           isClinic
-            ? "/brand/logo-banner-blue-v1.png"
+            ? "/brand/logo-banner.png"
             : "/brand/therethere-studio-banner-blue-v1.png",
           Astro.site,
         )
@@ -117,7 +117,13 @@ const canonical = new URL(
         }
       >
         {isClinic ? (
-          <img src="/brand/symbol-blue-v1.png" width="45" height="45" alt="" />
+          <img
+            class="clinic-logo"
+            src="/brand/logo-banner.png"
+            width="1200"
+            height="400"
+            alt="AIアプリ診療所"
+          />
         ) : (
           <img
             class="studio-logo"
@@ -126,16 +132,6 @@ const canonical = new URL(
             height="793"
             alt="There There Studio"
           />
-        )}
-        {isClinic && (
-          <span>
-            {isClinic ? "AIアプリ診療所" : "There There"}
-            <small>
-              {isClinic
-                ? "BY THERE THERE STUDIO"
-                : "STUDIO / つくばのアプリ開発スタジオ"}
-            </small>
-          </span>
         )}
       </a>
       <nav class="desktop-nav" aria-label="メインメニュー">
@@ -203,13 +199,12 @@ const canonical = new URL(
             </>
           )}
           <a href="/about">運営について</a>
-          <a href="/about#legal">特定商取引法に基づく表記（準備中）</a>
           <a href="/site-privacy">プライバシーポリシー</a>
         </div>
       </div>
       <div class="footer-bottom">
         <span>© {new Date().getFullYear()} There There Studio</span>
-        <span>つくばから、WebとiOSのアプリを。</span>
+        <span>WebとiOSのアプリを。</span>
         <a href="#main">ページの先頭へ ↑</a>
       </div>
     </footer>

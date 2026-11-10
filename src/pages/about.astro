@@ -1,6 +1,7 @@
 ---
 export const prerender = true;
 import Layout from '../layouts/Layout.astro';
+import { operator } from '../data/operator';
 const about = {
   title: '業務の理解から、\n開発・公開後の運用まで。',
   text: '企業向け業務システムの導入プロジェクトに、コンサルタントとして10年以上従事。React / Next.jsを中心としたWebアプリ開発に5年以上携わっています。開発リードとして複数の企業向けFintech系Webアプリをリリースし、現在も運用・保守を担当しています。',
@@ -13,8 +14,9 @@ const about = {
 };
 const legal = [
   ['役務提供事業者', ''],
-  ['所在地', ''],
-  ['電話番号・受付時間', ''],
+  ['所在地', operator.address],
+  ['電話番号', operator.phone],
+  ['受付時間', ''],
   ['メールアドレス', 'info@therethere.studio'],
   [
     'サービス料金',
@@ -38,7 +40,7 @@ const legal = [
       <a href="/">ホーム</a> / 運営者情報
     </p>
     <span class="mono">THERE THERE STUDIO</span>
-    <h1 class="page-title">運営について。</h1><p class="page-lead">There There Studioは、茨城県つくば市のアプリ開発スタジオです。Web・iOSアプリの企画・開発と、AIアプリ診療所を運営しています。</p>
+    <h1 class="page-title">運営について。</h1><p class="page-lead">There There Studioは、東京・青山を拠点とするアプリ開発スタジオです。Web・iOSアプリの企画・開発と、AIアプリ診療所を運営しています。</p>
     <div class="profile">
       <img src="/images/operator.png" width="1254" height="1254" alt="There There Studioの運営者" />
       <div>
@@ -63,7 +65,7 @@ const legal = [
           {legal.map(([label, value]) => (
             <tr>
               <th scope="row">{label}</th>
-              <td>{value || '準備中'}</td>
+              <td>{label === '電話番号' ? <a href={operator.phoneHref}>{value}</a> : value || '準備中'}</td>
             </tr>
           ))}
         </tbody>
